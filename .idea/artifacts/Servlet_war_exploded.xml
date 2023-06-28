@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Servlet:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Servlet_war_exploded</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/web" />
+      <element id="module-source" name="Servlet" />
+    </root>
+  </artifact>
+</component>
