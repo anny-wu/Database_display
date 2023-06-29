@@ -1,44 +1,50 @@
 package com.annyw.servlet;
 
+import com.annyw.pojo.User;
 import com.annyw.dao.UserDaoImpl;
 import com.annyw.pojo.Page;
-import com.annyw.pojo.User;
 import com.annyw.util.DBUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+@WebServlet(name = "QueryUserByPage", value = "/QueryUserByPage")
 public class QueryUserByPage extends HttpServlet{
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        String table_name = "TESTNEW";
-        int count = DBUtil.getCount(table_name);
+        DBUtil util = new DBUtil();
+        String table_name = "USER";
+        int count = util.getCount(table_name);
         
         String cPage = request.getParameter("currentPage");
-        if(cPage == null)
+        if(cPage == null || cPage == "") {
             cPage = "1";
+        }
         int currentPage = Integer.parseInt(cPage);
         
-        String cPageSize = request.getParameter("pageSize");
-        if(cPageSize == null)
-            cPageSize = "5";
-        int pageSize = Integer.parseInt(cPageSize);
+        String pSize = request.getParameter("pageSize");
+        if(pSize == null)
+            pSize = "5";
+        int pageSize = Integer.parseInt(pSize);
         int pageCount = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
         List<User> users = UserDaoImpl.queryUserByPage(table_name, currentPage, pageSize);
         
-        Page page = new Page(pageSize, pageCount, count, currentPage, users);
+        Page page = new Page(pageSize, count, pageCount, currentPage, users);
         
+        
+        request.setAttribute("users", users);
         request.setAttribute("page", page);
-        request.getRequestDispatcher("page.jsp").forward(request, response);
+        request.getRequestDispatcher("filtered.jsp").forward(request, response);
         
     }
-    
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        System.out.println("======");
     }
     
 }

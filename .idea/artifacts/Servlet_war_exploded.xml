@@ -1,9 +1,22 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="Servlet:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/Servlet_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/web/WEB-INF/classes/artifacts/Servlet_war_exploded</output-path>
     <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Servlet" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.mysql:mysql-connector-j:8.0.33" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.21.9" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.2" />
+          <element id="library" level="project" name="Maven: junit:junit:4.12" />
+          <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
+          <element id="library" level="project" name="jstl-1.2" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Servlet/web/Web" />
       <element id="dir-copy" path="$PROJECT_DIR$/web" />
-      <element id="module-source" name="Servlet" />
     </root>
   </artifact>
 </component>

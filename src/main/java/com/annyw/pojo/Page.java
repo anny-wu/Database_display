@@ -2,9 +2,8 @@ package com.annyw.pojo;
 import java.util.List;
 public class Page<T>{
     private int pageSize;
-    private int pageCount;
-    private int totalSize;
-    private int totalCount;
+    private int totalSize; //Number of data entries
+    private int totalCount;//Number of pages
     private int preNum;
     private int nextNum;
     private int currentPage;
@@ -16,14 +15,6 @@ public class Page<T>{
     
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
-    }
-    
-    public int getPageCount() {
-        return pageCount;
-    }
-    
-    public void setPageCount(int pageCount) {
-        this.pageCount = pageCount;
     }
     
     public int getTotalSize() {
@@ -75,16 +66,17 @@ public class Page<T>{
     }
     
     
-    public Page(int pageSize, int pageCount, int totalSize, int currentPage, List<T> users) {
+    //Constructor for Page
+    public Page(int pageSize, int totalSize, int totalCount, int currentPage, List<T> users) {
         this.pageSize = pageSize;
-        this.pageCount = pageCount;
         this.totalSize = totalSize;
-        this.totalCount = (int) Math.ceil(totalSize/(pageSize*1.0));
-        
-        this.preNum=pageCount-1<1?1:pageCount-1;
-        this.nextNum=pageCount+1>totalCount?totalSize:pageCount+1;
+        this.totalCount = totalSize==0?1:(int)Math.ceil(totalSize/(pageSize*1.0));
         
         this.currentPage = currentPage;
+        this.preNum=currentPage-1<1?1:currentPage-1;
+        this.nextNum=currentPage+1>totalCount?totalCount:currentPage+1;
+        
+        
         this.users = users;
     }
 }

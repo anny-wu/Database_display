@@ -3,9 +3,9 @@ package com.annyw.util;
 import java.sql.*;
 
 public class DBUtil {
-    
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/example?useSSl=true&amp;sueUnicode=true&amp;" +
-        "characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/DB?useSSl=true&useUnicode=true&" +
+        "characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "1234";
     
@@ -15,7 +15,7 @@ public class DBUtil {
     
     //Get Connection
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName(DRIVER);
         return DriverManager.getConnection(URL,USERNAME,PASSWORD);
     }
     
@@ -63,6 +63,23 @@ public class DBUtil {
         }
         return count;
     }
+    
+    public static int executeUpdate(String sql, Object[] params) {
+        try {
+            pstmt = createPstmt(sql,params);
+            return pstmt.executeUpdate();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
     public static ResultSet executeQuery(String sql, Object[] params) {
         try {
             pstmt = createPstmt(sql,params);
