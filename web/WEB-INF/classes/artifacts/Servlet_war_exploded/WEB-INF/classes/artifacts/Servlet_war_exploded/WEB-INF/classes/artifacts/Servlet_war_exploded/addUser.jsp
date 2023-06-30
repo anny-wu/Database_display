@@ -15,6 +15,9 @@
     <title>addUser</title>
 </head>
 <style>
+    h2{
+        text-align: center;
+    }
     .flabel{
         margin-top: 20px;
     }
@@ -24,6 +27,9 @@
 </style>
 
 <body>
+<div>
+    <h2>Add User</h2>
+</div>
 <div class="row">
     <div class="col-8 m-auto">
         <form action="AddUser">
@@ -65,6 +71,11 @@
                 %>
             </div>
             <button type="submit" class="btn btn-primary" id="add">Add</button>
+        </form>
+        <form>
+            <form action="filtered.jsp">
+                <button type="submit" class="btn btn-primary" id="back">Back</button>
+            </form>
         </form>
     </div>
 </div>

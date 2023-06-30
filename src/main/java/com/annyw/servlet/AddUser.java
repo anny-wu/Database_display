@@ -1,49 +1,25 @@
 package com.annyw.servlet;
-import com.annyw.dao.UserDaoImpl;
-import com.annyw.dao.UserDao;
-import com.annyw.pojo.User;
-import com.annyw.util.DBUtil;
-import com.annyw.util.MybatisUtils;
 
-import javax.servlet.ServletException;
+import com.annyw.dao.UserDao;
+import com.annyw.util.MybatisUtils;
+import org.apache.ibatis.session.SqlSession;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import org.apache.ibatis.session.SqlSession;
 
-import java.util.Iterator;
-import java.util.List;
 
 public class AddUser extends HttpServlet {
     SqlSession sqlSession;
     
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-        IOException  {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
      try {
-         MybatisUtils butil = new MybatisUtils();
-         this.sqlSession = butil.getSqlSession();
+         this.sqlSession = MybatisUtils.getSqlSession();
          UserDao mapper = this.sqlSession.getMapper(UserDao.class);
-         
          String table_name = request.getParameter("table_name");
          mapper.addUser(table_name, Integer.parseInt(request.getParameter("id")), request.getParameter("username"),
              Integer.parseInt(request.getParameter("age")));
-         
-         List<User> userList = mapper.getAllUsers("USER");
-         mapper.count("USER");
-         Iterator itr = userList.iterator();
-         
-         while (itr.hasNext()) {
-             User user = (User)itr.next();
-             System.out.println(user);
-         }
-         mapper.count("USER");
-         
-         DBUtil util = new DBUtil();
-         int count = util.getCount("USER");
-         System.out.println(count + "db");
-         
-         mapper.count("USER");
+         this.sqlSession.commit();
          request.getRequestDispatcher("QueryUserByPage").forward(request, response);
      }
      catch (Exception e) {
@@ -58,8 +34,7 @@ public class AddUser extends HttpServlet {
        
     }
     
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-        IOException  {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         doGet(request, response);
     }
 }

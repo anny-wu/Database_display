@@ -15,17 +15,28 @@
     <title>addUser</title>
 </head>
 <style>
+    h2{
+        text-align: center;
+        margin-top: 50px;
+    }
+    .back{
+        background-color: lightsalmon;
+        border-radius: 20px;
+    }
     .flabel{
         margin-top: 20px;
     }
-    #add{
-        margin-top: 20px;
+    .controlB{
+        margin: 20px;
     }
 </style>
 
 <body>
+<div>
+    <h2>Add User</h2>
+</div>
 <div class="row">
-    <div class="col-8 m-auto">
+    <div class="col-8 m-auto back">
         <form action="AddUser">
             <div class="form-group row">
                 <%
@@ -64,7 +75,10 @@
                     }
                 %>
             </div>
-            <button type="submit" class="btn btn-primary" id="add">Add</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary controlB" formaction="AddUser">Add</button>
+                <button type="submit" class="btn btn-primary controlB" formaction="QueryUserByPage">Back</button>
+            </div>
         </form>
     </div>
 </div>

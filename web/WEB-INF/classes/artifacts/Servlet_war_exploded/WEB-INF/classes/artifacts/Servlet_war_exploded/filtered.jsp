@@ -31,10 +31,10 @@
             color: black;
             margin-right: 20px;
         }
-        #addform{
+        #controls{
             text-align:right;
         }
-        #add {
+        #add, delete{
             border: none;
             cursor: pointer;
         }
@@ -58,17 +58,27 @@
     </div>
     <div class="row">
         <div class="col-8 m-auto">
-            <div id="addform">
-            <form action="addUser.jsp" method="post">
+            <div id="controls">
+            <form action="deleteUser.jsp" method="post">
                 <input type="hidden" name="count" value="${count}">
                 <input type="hidden" name="table_name" value="${table_name}">
+                <button id="delete" type="submit" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-dash-square-fill iconS" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
+                    </svg>
+                </button>
+            </form>
+                <form action="addUser.jsp" method="post">
+                    <input type="hidden" name="count" value="${count}">
+                    <input type="hidden" name="table_name" value="${table_name}">
                 <button id="add" type="submit" class="btn">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="bi bi-plus-square-fill iconS" viewBox="0 0 16 16">
                         <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
                     </svg>
                 </button>
-            </form>
+                </form>
+
             </div>
             <table class="table table-striped table-hover mx-auto">
                 <thead class="table-info">
@@ -108,13 +118,21 @@
         <%
             int currP = p.getCurrentPage();
             int total = p.getTotalCount();
-            if (p.getCurrentPage() == 1) {
         %>
                 <nav class="m-auto">
                     <ul class="pagination justify-content-center">
+                        <%if (p.getCurrentPage() == 1) {%>
                         <li class="page-item disabled">
                             <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><span aria-hidden="true">&laquo;</span></a>
                         </li>
+                        <%}else{%>
+                        <li class="page-item">
+                            <a class="page-link" href="QueryUserByPage?currentPage=<%=currP-1%>&pageSize=${pageS}"
+                               aria-disabled="true"><span aria-hidden="true">&laquo;</span></a>
+                        </li>
+                        <%}%>
+
+
                         <%
                             for (int i = 1; i <= total; i++) {
                                 if (p.getCurrentPage() == i) {
@@ -124,56 +142,18 @@
                              <% } %>
                                     <a class="page-link" href="QueryUserByPage?currentPage=<%=i%>&pageSize=${pageS}"><%=i%></a></li>
                         <%}%>
-                        <li class="page-item">
-                            <a class="page-link" href="QueryUserByPage?currentPage=<%=currP+1%>&pageSize=${pageS}">&raquo;</a>
-                        </li>
-                    </ul>
-                </nav>
-        <%  }else if (p.getCurrentPage() == p.getTotalCount()) {%>
-                <nav>
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="QueryUserByPage?currentPage=<%=currP-1%>&pageSize=${pageS}"><span
-                                    aria-hidden="true">&laquo;</span></a>
-                        </li>
-                        <%
-                            for (int i = 1; i <= total; i++) {
-                                if (p.getCurrentPage() == i) {
-                        %>          <li class="page-item active" aria-current="page">
-                        <%      }else{ %>
-                                    <li class="page-item">
-                        <%      } %>
-                                <a class="page-link" href="QueryUserByPage?currentPage=<%=i%>&pageSize=${pageS}"><%=i%></a></li>
-                        <%  } %>
+                        <%if (p.getCurrentPage() == p.getTotalCount()) {%>
                         <li class="page-item">
                             <a class="page-link disabled" href="#">&raquo;</a>
                         </li>
+                        <%}else{%>
+                        <li class="page-item">
+                            <a class="page-link" href="QueryUserByPage?currentPage=<%=currP+1%>&pageSize=${pageS}">&raquo;</a>
+                        </li>
+            <%}%>
+
                     </ul>
                 </nav>
-        <% } else { %>
-                <nav>
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="QueryUserByPage?currentPage=<%=currP-1%>&pageSize=${pageS}"
-                               aria-disabled="true"><span aria-hidden="true">&laquo;</span></a>
-                        </li>
-                        <%
-                            for (int i = 1; i <= total; i++) {
-                                if (p.getCurrentPage() == i) {
-                        %>          <li class="page-item active" aria-current="page">
-                        <%      }else{ %>
-                                    <li class="page-item">
-                        <%      } %>
-                                    <a class="page-link" href="QueryUserByPage?currentPage=<%=i%>&pageSize=${pageS}"><%=i%>
-                                    </a></li>
-                        <%  } %>
-                        <li class="page-item">
-                            <a class="page-link" href="QueryUserByPage?currentPage=<%=currP+1%>&pageSize=${pageS}" tabindex="-1"
-                               aria-disabled="true"><span aria-hidden="true">&raquo;</span></a>
-                        </li>
-                    </ul>
-                </nav>
-        <%  }%>
 
         <form action="QueryUserByPage">
             Display

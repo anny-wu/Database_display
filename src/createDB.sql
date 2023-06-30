@@ -1,7 +1,8 @@
-CREATE DB;
+DROP DATABASE IF EXISTS DB;
+CREATE DATABASE DB;
 USE DB;
-DROP TABLE IF EXISTS TESTNEW;
-CREATE TABLE TESTNEW(
+DROP TABLE IF EXISTS USER;
+CREATE TABLE USER(
                         id INTEGER PRIMARY KEY AUTO_INCREMENT,
                         username varchar(24) NOT NULL,
                         age INTEGER NOT NULL,
@@ -9,12 +10,7 @@ CREATE TABLE TESTNEW(
 DROP TRIGGER IF EXISTS updateTrigger;
 CREATE TRIGGER updateTrigger
     BEFORE
-        UPDATE ON testnew FOR EACH ROW
+        UPDATE ON USER FOR EACH ROW
 BEGIN
     SET NEW.update_time=NOW();
 END;
-INSERT INTO TESTNEW (username,age) VALUES ('Tom', 18);
-INSERT INTO TESTNEW (username,age) VALUES ('Jessica', 36);
-INSERT INTO TESTNEW (username,age) VALUES ('Jack', 20);
-INSERT INTO TESTNEW (username,age) VALUES ('Catherine', 10);
-UPDATE testnew SET username = 'Austin' where id = 1

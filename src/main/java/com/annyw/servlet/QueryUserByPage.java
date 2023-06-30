@@ -18,7 +18,6 @@ public class QueryUserByPage extends HttpServlet{
         DBUtil util = new DBUtil();
         String table_name = "USER";
         int count = util.getCount(table_name);
-        System.out.println(count);
         
         String cPage = request.getParameter("currentPage");
         if(cPage == null || cPage == "") {
