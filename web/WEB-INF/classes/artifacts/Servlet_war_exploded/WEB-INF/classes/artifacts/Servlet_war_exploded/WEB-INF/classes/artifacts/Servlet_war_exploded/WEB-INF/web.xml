@@ -11,5 +11,13 @@
         <servlet-name>QueryUserByPage</servlet-name>
         <url-pattern>/QueryUserByPage</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddUser</servlet-name>
+        <servlet-class>com.annyw.servlet.AddUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddUser</servlet-name>
+        <url-pattern>/AddUser</url-pattern>
+    </servlet-mapping>
 </web-app>
 

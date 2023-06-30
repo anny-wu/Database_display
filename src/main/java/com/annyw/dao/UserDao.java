@@ -9,9 +9,12 @@ public interface UserDao {
     void createTable(String tablename);
     void checkTrigger();
     void createTrigger(String tablename);
-    void addUser(@Param("table_name") String table_name, @Param("puname") String username, @Param("page") int age);
+    void addUser(@Param("table_name") String table_name, @Param("pid") int id, @Param("puname") String username,
+        @Param("page") int age);
+    
     void changeName();
     List<User> getUserList(String name);
     List<User> getAllUsers(String name);
+    List<User> count(String tablename);
 }
 

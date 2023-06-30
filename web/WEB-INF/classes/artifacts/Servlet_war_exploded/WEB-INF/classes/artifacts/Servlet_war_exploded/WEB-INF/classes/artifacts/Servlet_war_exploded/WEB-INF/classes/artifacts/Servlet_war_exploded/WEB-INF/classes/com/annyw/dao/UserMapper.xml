@@ -28,7 +28,7 @@
             END
     </update>
     <insert id="addUser">
-        insert into ${table_name} (username, age) values (#{puname}, #{page})
+        insert into ${table_name} (id, username, age) values (#{pid}, #{puname}, #{page})
     </insert>
     <update id="changeName">
         UPDATE testnew SET username = 'Austin' where id = 1
@@ -38,5 +38,8 @@
     </select>
     <select id="getAllUsers" resultType="com.annyw.pojo.User" parameterType="String">
         select * from ${name}
+    </select>
+    <select id="count" resultType="com.annyw.pojo.User" parameterType="String">
+        select count(*) from ${name}
     </select>
 </mapper>

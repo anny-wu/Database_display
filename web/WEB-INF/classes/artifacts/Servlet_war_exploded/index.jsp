@@ -1,21 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+
 <html>
 <head>
-  <title></title>
+  <title>Home</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
+<style>
+
+</style>
 <body>
-<h1>Welcome to Database Users</h1>
-<form action="QueryUserByPage">
-  Display
-  <select name="pageSize">
-    <option value="3">3</option>
-    <option value="5">5</option>
-    <option value="7">7</option>
-    <option value="10">10</option>
-  </select>
-  rows
-  <input type="submit" value="Go">
-</form>
+<div class="cover-container d-flex h-100 p-3 flex-column align-items-center justify-content-center">
+  <h1>Welcome to Database Users</h1>
+  <form action="QueryUserByPage">
+    <button class="btn btn-info" type="submit">Go to database</button>
+  </form>
+</div>
+
 </body>
 </html>
 

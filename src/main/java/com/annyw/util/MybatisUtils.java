@@ -10,22 +10,20 @@ import java.io.InputStream;
 
 //sqlSessionFactory -->sqlSession
 public class MybatisUtils {
-    private static SqlSessionFactory sqlSessionFactory;
+    private static SqlSessionFactory sqlSessionFactory = null;
     
-    //Obtain sqlSessionFactory object
-    static {
-        try {
+    public static SqlSessionFactory createFactory() throws IOException {
+        if(sqlSessionFactory == null){
             String resource = "mybatis-config.xml";
             InputStream inputStream = Resources.getResourceAsStream(resource);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            inputStream.close();
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        return sqlSessionFactory;
     }
     
-    public static SqlSession getSqlSession() {
-        return sqlSessionFactory.openSession();
+    public static SqlSession getSqlSession() throws IOException {
+        return createFactory().openSession();
     }
     
 }

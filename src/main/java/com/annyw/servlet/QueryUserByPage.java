@@ -9,17 +9,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "QueryUserByPage", value = "/QueryUserByPage")
 public class QueryUserByPage extends HttpServlet{
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DBUtil util = new DBUtil();
         String table_name = "USER";
         int count = util.getCount(table_name);
+        System.out.println(count);
         
         String cPage = request.getParameter("currentPage");
         if(cPage == null || cPage == "") {
@@ -29,7 +28,7 @@ public class QueryUserByPage extends HttpServlet{
         
         String pSize = request.getParameter("pageSize");
         if(pSize == null)
-            pSize = "5";
+            pSize = "3";
         int pageSize = Integer.parseInt(pSize);
         int pageCount = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
         List<User> users = UserDaoImpl.queryUserByPage(table_name, currentPage, pageSize);
@@ -37,13 +36,15 @@ public class QueryUserByPage extends HttpServlet{
         Page page = new Page(pageSize, count, pageCount, currentPage, users);
         
         
-        request.setAttribute("users", users);
         request.setAttribute("page", page);
+        request.setAttribute("table_name", table_name);
+        request.setAttribute("count", count);
+        request.setAttribute("pageS", pageSize);
         request.getRequestDispatcher("filtered.jsp").forward(request, response);
         
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("======");
     }
     
