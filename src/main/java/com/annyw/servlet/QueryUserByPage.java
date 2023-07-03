@@ -15,6 +15,11 @@ import java.util.List;
 public class QueryUserByPage extends HttpServlet{
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+     doPost(request,response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
         String table_name = "USER";
         int count = DBUtil.getCount(table_name);
         
@@ -39,10 +44,7 @@ public class QueryUserByPage extends HttpServlet{
         request.setAttribute("count", count);
         request.getRequestDispatcher("filtered.jsp").forward(request, response);
         
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("======");
+        
     }
     
 }

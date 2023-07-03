@@ -28,7 +28,7 @@
             END
     </update>
     <insert id="addUser">
-        insert into ${table_name} (id, username, age) values (#{pid}, #{puname}, #{page})
+        insert into ${table_name} (username, age) values (#{puname}, #{page})
     </insert>
     <delete id="deleteUser">
         delete from ${table_name} where id = #{pid};
@@ -37,8 +37,8 @@
         ALTER TABLE ${table_name}  MODIFY COLUMN id int NOT NULL AUTO_INCREMENT,ADD PRIMARY KEY(id);
 
     </delete>
-    <update id="changeName">
-        UPDATE USER SET username = 'Austin' where id = 1
+    <update id="updateUser">
+        UPDATE ${table_name} SET username = '${puname}', age = ${page} where id = ${pid}
     </update>
     <select id="getUserList" resultType="com.annyw.pojo.User" parameterType="String">
         select * from ${name} where age &lt; 20
@@ -48,5 +48,13 @@
     </select>
     <select id="count" resultType="com.annyw.pojo.User" parameterType="String">
         select count(*) from ${name}
+    </select>
+
+    <select id="matchUsername" resultType="com.annyw.pojo.Client" >
+        select count(*) from ${name} where username = '${puname}'
+    </select>
+
+    <select id="matchPassword" resultType="com.annyw.pojo.Client" >
+        select count(*) from ${name} where username = '${puname}' and password = '${pwd}'
     </select>
 </mapper>

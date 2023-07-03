@@ -56,7 +56,7 @@
 <div class="row">
     <div class="col-8 m-auto back">
         <form>
-            <input type="hidden" name="pageSize" value="<%=request.getParameter("pageSize")%>">
+            <input type="hidden" name="pageS" value="<%=request.getParameter("pageS")%>">
             <input type="hidden" id="deleted" name="deleted" value="1">
             <div class="form-group row">
                 <label class="flabel col-2 col-form-label"><strong>TABLE NAME</strong></label>

@@ -37,7 +37,7 @@ public class UserDaoTest {
             
             //Setup Table
             System.out.println("Add user Anny:");
-            mapper.addUser("USER", 1, "Anny", 12);
+            mapper.addUser("USER", "Anny", 12);
             
             List<User> userList = mapper.getAllUsers("USER");
             Iterator itr = userList.iterator();
@@ -49,7 +49,7 @@ public class UserDaoTest {
             System.out.println();
             
             System.out.println("Add user Tom:");
-            mapper.addUser("USER", 2, "Tom", 18);
+            mapper.addUser("USER",  "Tom", 18);
             
             userList = mapper.getAllUsers("USER");
             itr = userList.iterator();
@@ -61,7 +61,7 @@ public class UserDaoTest {
             System.out.println();
             
             System.out.println("Add user Jessica:");
-            mapper.addUser("USER", 3, "Jessica", 36);
+            mapper.addUser("USER", "Jessica", 36);
             
             userList = mapper.getAllUsers("USER");
             itr = userList.iterator();
@@ -73,7 +73,7 @@ public class UserDaoTest {
             System.out.println();
             
             System.out.println("Add user Jack:");
-            mapper.addUser("USER", 4, "Jack", 20);
+            mapper.addUser("USER", "Jack", 20);
             
             userList = mapper.getAllUsers("USER");
             itr = userList.iterator();
@@ -85,7 +85,7 @@ public class UserDaoTest {
             System.out.println();
             
             System.out.println("Add user Catherine:");
-            mapper.addUser("USER", 5,"Catherine", 10);
+            mapper.addUser("USER", "Catherine", 10);
             
             userList = mapper.getAllUsers("USER");
             itr = userList.iterator();

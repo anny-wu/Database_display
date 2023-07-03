@@ -48,7 +48,7 @@
             fill: #0c6dfd;
         }
 
-        #display{
+        .display{
             margin-top:20px;
             margin-bottom: 20px;
         }
@@ -67,31 +67,35 @@
     <div class="row">
         <div class="col-8 m-auto">
             <div id="controls">
+                <form class="display" action="Logout">
+                    <button class="btn btn-secondary" type="submit" value="Logout">Log Out</button>
+                </form>
                 <div>
-            <form method="post">
-                <input type="hidden" name="table_name" value="${table_name}">
-                <input type="hidden" name="count" value="${count}">
-                <input type="hidden" name="users" value="${users}">
-                <input type="hidden" name="pageS" value="${pageS}">
-                <button id="add" type="submit" formaction="addUser.jsp" class="btn controls">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="bi bi-plus-square-fill iconS" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-                    </svg>
-                </button>
-                <c:if test="${count > 0}">
-                <button id="delete" type="submit" formaction="deleteUser.jsp" class="btn controls">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-dash-square-fill iconS" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
-                    </svg>
-                </button>
-                <button id="edit" type="submit" formaction="editUser.jsp" class="btn btn-primary btn-sm">Edit</button>
-                </c:if>
-            </form>
-                </div>
-                <div>
-                    <form id="display" action="QueryUserByPage">
+                    <form class="display d-flex justify-content-between" method="post">
+                        <div>
+                        <input type="hidden" name="table_name" value="${table_name}">
+                        <input type="hidden" name="count" value="${count}">
+                        <input type="hidden" name="users" value="${users}">
+                        <input type="hidden" name="pageS" value="${pageS}">
+                        <button id="add" type="submit" formaction="addUser.jsp" class="btn controls">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="bi bi-plus-square-fill iconS" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </button>
+                        <c:if test="${count > 0}">
+                            <button id="delete" type="submit" formaction="deleteUser.jsp" class="btn controls">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-dash-square-fill iconS" viewBox="0 0 16 16">
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
+                                </svg>
+                            </button>
+                            <button id="edit" type="submit" formaction="editUser.jsp" class="btn btn-primary btn-sm">Edit</button>
+                        </c:if>
+                        </div>
+                        <div>
                         Display
+
+
                         <select id="ps" name="pageSize">
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -99,7 +103,9 @@
                             <option value="4">4</option>
                         </select>
                         rows per page
-                        <button class="btn btn-outline-primary btn-sm" type="submit">Go</button>
+                        <button class="btn btn-outline-primary btn-sm"
+                                formaction="QueryUserByPage"type="submit">Go</button>
+                        </div>
                     </form>
                 </div>
 

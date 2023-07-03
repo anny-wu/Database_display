@@ -1,5 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="com.annyw.pojo.Page" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@page import="com.annyw.pojo.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.reflect.Field" %>

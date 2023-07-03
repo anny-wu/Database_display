@@ -1,8 +1,6 @@
 package com.annyw.dao;
 
-import com.annyw.dao.UserDao;
 import com.annyw.pojo.User;
-import com.annyw.pojo.Page;
 import com.annyw.util.DBUtil;
 import com.annyw.util.Unboxed;
 

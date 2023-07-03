@@ -4,6 +4,15 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.annyw.servlet.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>QueryUserByPage</servlet-name>
         <servlet-class>com.annyw.servlet.QueryUserByPage</servlet-class>
     </servlet>

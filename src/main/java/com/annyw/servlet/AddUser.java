@@ -17,7 +17,7 @@ public class AddUser extends HttpServlet {
          this.sqlSession = MybatisUtils.getSqlSession();
          UserDao mapper = this.sqlSession.getMapper(UserDao.class);
          String table_name = request.getParameter("table_name");
-         mapper.addUser(table_name, Integer.parseInt(request.getParameter("id")), request.getParameter("username"),
+         mapper.addUser(table_name, request.getParameter("username"),
              Integer.parseInt(request.getParameter("age")));
          this.sqlSession.commit();
          request.setAttribute("pageS", request.getParameter("pageS"));

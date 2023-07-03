@@ -109,16 +109,14 @@
 </div>
 </body>
 <script>
-        $('.edit').on('input',function(e) {
+        $('.edit').on('input',function() {
             var empty = false;
             $('.edit').each(function() {
                 if ($(this).val() == '') {
                     empty = true;
-                    alert(1);
                 }
             });
 
-            alert(empty);
             if (empty) {
                 $('#add').addClass('disabled');
             }
