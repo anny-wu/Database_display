@@ -17,12 +17,29 @@
 <style>
     h2{
         text-align: center;
+        margin-top: 50px;
+    }
+    .back{
+        background-color: lightsalmon;
+        border-radius: 20px;
     }
     .flabel{
         margin-top: 20px;
     }
-    #add{
+
+    .form-group{
         margin-top: 20px;
+        margin-left: 20px;
+    }
+
+    #buttons{
+        margin-top:20px;
+        margin-bottom:20px;
+        float:right;
+    }
+    .controlB{
+        width: 200px;
+        margin: 10px;
     }
 </style>
 
@@ -31,54 +48,81 @@
     <h2>Add User</h2>
 </div>
 <div class="row">
-    <div class="col-8 m-auto">
-        <form action="AddUser">
+    <div class="col-8 m-auto back">
+        <form>
+            <input type="hidden" name="pageS" value="<%=request.getParameter("pageS")%>">
             <div class="form-group row">
                 <%
                     Class<?> cls = Class.forName("com.annyw.pojo.User");
                     Field[] fields = cls.getDeclaredFields();
                 %>
-                <label class="flabel col-sm-2 col-form-label">TABLE NAME</label>
-                <div class="col-sm-10">
-                    <input type="text" readonly class="flabel form-control-plaintext" name="table_name" value="<%=request.getParameter("table_name")%>">
+                <label class="flabel col-2 col-form-label"><strong>TABLE NAME</strong></label>
+                <div class="col-4">
+
+                    <input type="text" readonly class="flabel col-2 form-control-plaintext" name="table_name"
+                           value="<%=request.getParameter("table_name")%>">
+                </div>
+                <label class="flabel col-2 col-form-label"><strong>ID</strong></label>
+                <div class="col-4">
+
+                    <%
+                        String pCount = request.getParameter("count");
+                        if (pCount == null){
+                            pCount = "0";
+                        }
+                        int nextId = Integer.parseInt(pCount)+1;
+                    %>
+                    <input type="text" readonly class="flabel col-2 form-control-plaintext" id=id" name="id"
+                           value="<%=nextId%>">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="flabel col-sm-2 col-form-label">ID</label>
-                    <div class="col-sm-10">
-                        <%
-                            String pCount = request.getParameter("count");
-                            if (pCount == null){
-                                pCount = "0";
-                            }
-                            int nextId = Integer.parseInt(pCount)+1;
-                        %>
-                        <input type="text" readonly class="flabel form-control-plaintext" id=id" name="id"
-                               value="<%=nextId%>">
-                    </div>
-            </div>
-            <div class="form-group">
+
                <%
                    for(int i = 1; i < fields.length-1; i++){
                        String fname = fields[i].getName().toUpperCase();
                %>
-                    <label class="flabel"><%=fname%></label>
-                    <input type="<%=fields[i].getName()%>" class="form-control" name="<%=fields[i].getName()%>"
-                           aria-describedby="<%=fields[i].getName()%>+'Help'"
-                       placeholder="<%=fields[i].getName()%>">
+                <div class="col-6">
+                    <label class="flabel col-2 col-form-label"><strong><%=fname%></strong></label>
+
+                    <div class="form-outline w-50">
+                        <input type="<%=fields[i].getName()%>" class="form-control edit" name="<%=fields[i].getName()%>"
+                               aria-describedby="<%=fields[i].getName()%>+'Help'"
+                               placeholder="<%=fields[i].getName()%>">
+                    </div>
+                </div>
+
+
                 <%
                     }
                 %>
             </div>
-            <button type="submit" class="btn btn-primary" id="add">Add</button>
-        </form>
-        <form>
-            <form action="filtered.jsp">
-                <button type="submit" class="btn btn-primary" id="back">Back</button>
-            </form>
+            <div id="buttons">
+                <div>
+                    <button id="add" type="submit" class="btn btn-lg btn-primary controlB disabled"
+                    formaction="AddUser">Add</button>
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="QueryUserByPage">Back</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>
-
 </body>
+<script>
+        $('.edit').on('input',function() {
+            var empty = false;
+            $('.edit').each(function() {
+                if ($(this).val() == '') {
+                    empty = true;
+                }
+            });
+
+            if (empty) {
+                $('#add').addClass('disabled');
+            }
+            else{
+                $('#add').removeClass('disabled');
+            }
+        });
+</script>
 </html>

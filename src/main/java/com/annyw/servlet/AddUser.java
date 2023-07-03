@@ -20,6 +20,7 @@ public class AddUser extends HttpServlet {
          mapper.addUser(table_name, Integer.parseInt(request.getParameter("id")), request.getParameter("username"),
              Integer.parseInt(request.getParameter("age")));
          this.sqlSession.commit();
+         request.setAttribute("pageS", request.getParameter("pageS"));
          request.getRequestDispatcher("QueryUserByPage").forward(request, response);
      }
      catch (Exception e) {

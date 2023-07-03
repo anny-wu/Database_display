@@ -19,5 +19,21 @@
         <servlet-name>AddUser</servlet-name>
         <url-pattern>/AddUser</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>com.annyw.servlet.DeleteUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/DeleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EditUser</servlet-name>
+        <servlet-class>com.annyw.servlet.EditUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditUser</servlet-name>
+        <url-pattern>/EditUser</url-pattern>
+    </servlet-mapping>
 </web-app>
 

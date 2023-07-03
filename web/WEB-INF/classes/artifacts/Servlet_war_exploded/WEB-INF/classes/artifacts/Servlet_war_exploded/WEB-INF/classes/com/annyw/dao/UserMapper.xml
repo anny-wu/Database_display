@@ -30,8 +30,15 @@
     <insert id="addUser">
         insert into ${table_name} (id, username, age) values (#{pid}, #{puname}, #{page})
     </insert>
-    <update id="changeName">
-        UPDATE testnew SET username = 'Austin' where id = 1
+    <delete id="deleteUser">
+        delete from ${table_name} where id = #{pid};
+        ALTER TABLE ${table_name} DROP id;
+        ALTER TABLE ${table_name}  ADD id int NOT NULL FIRST;
+        ALTER TABLE ${table_name}  MODIFY COLUMN id int NOT NULL AUTO_INCREMENT,ADD PRIMARY KEY(id);
+
+    </delete>
+    <update id="updateUser">
+        UPDATE ${table_name} SET username = '${puname}', age = ${page} where id = ${pid}
     </update>
     <select id="getUserList" resultType="com.annyw.pojo.User" parameterType="String">
         select * from ${name} where age &lt; 20

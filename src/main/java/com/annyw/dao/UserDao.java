@@ -11,8 +11,9 @@ public interface UserDao {
     void createTrigger(String tablename);
     void addUser(@Param("table_name") String table_name, @Param("pid") int id, @Param("puname") String username,
         @Param("page") int age);
-    
-    void changeName();
+    void deleteUser(@Param("table_name") String table_name, @Param("pid") int id);
+    void updateUser(@Param("table_name") String table_name, @Param("pid") int id, @Param("puname") String username,
+        @Param("page") int age);
     List<User> getUserList(String name);
     List<User> getAllUsers(String name);
     List<User> count(String tablename);

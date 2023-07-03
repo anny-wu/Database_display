@@ -15,12 +15,11 @@ import java.util.List;
 public class QueryUserByPage extends HttpServlet{
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DBUtil util = new DBUtil();
         String table_name = "USER";
-        int count = util.getCount(table_name);
+        int count = DBUtil.getCount(table_name);
         
         String cPage = request.getParameter("currentPage");
-        if(cPage == null || cPage == "") {
+        if(cPage == null || cPage.equals("") ){
             cPage = "1";
         }
         int currentPage = Integer.parseInt(cPage);
@@ -32,13 +31,12 @@ public class QueryUserByPage extends HttpServlet{
         int pageCount = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
         List<User> users = UserDaoImpl.queryUserByPage(table_name, currentPage, pageSize);
         
-        Page page = new Page(pageSize, count, pageCount, currentPage, users);
+        Page<User> page = new Page<>(pageSize, count, pageCount, currentPage, users);
         
-        
-        request.setAttribute("page", page);
         request.setAttribute("table_name", table_name);
-        request.setAttribute("count", count);
+        request.setAttribute("page", page);
         request.setAttribute("pageS", pageSize);
+        request.setAttribute("count", count);
         request.getRequestDispatcher("filtered.jsp").forward(request, response);
         
     }
