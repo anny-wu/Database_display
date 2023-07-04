@@ -16,6 +16,8 @@ import java.util.List;
 public class UserDaoImpl{
     //Display student by page
     public static List<User> queryUserByPage(String table_name, int currentPage, int pageSize){
+        
+        //Perform the student query in the table
         String sql = "select * from " + table_name +  " limit ?,?";
         List<User> users = new ArrayList<>();
         Object[] params = {(currentPage-1)*pageSize,pageSize};

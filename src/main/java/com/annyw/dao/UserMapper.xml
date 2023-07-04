@@ -4,9 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.annyw.dao.UserDao">
+
+    <select id="count" parameterType="String">
+        select count(*) from ${table_name}
+    </select>
+
     <update id="checkTable" parameterType="String">
         DROP TABLE IF EXISTS ${name}
     </update>
+
     <update id="createTable" parameterType="String">
         CREATE TABLE ${name}
         (
@@ -16,9 +22,11 @@
             update_time timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
         )
     </update>
+
     <update id="checkTrigger">
         DROP TRIGGER IF EXISTS updateTrigger
     </update>
+
     <update id="createTrigger" parameterType="String">
         CREATE TRIGGER updateTrigger
             BEFORE
@@ -27,46 +35,27 @@
                 SET NEW.update_time=NOW();
             END
     </update>
+
     <insert id="addUser">
         insert into ${table_name} (username, age) values (#{puname}, #{page})
     </insert>
+
     <delete id="deleteUser">
         delete from ${table_name} where id = #{pid};
         ALTER TABLE ${table_name} DROP id;
         ALTER TABLE ${table_name}  ADD id int NOT NULL FIRST;
         ALTER TABLE ${table_name}  MODIFY COLUMN id int NOT NULL AUTO_INCREMENT,ADD PRIMARY KEY(id);
-
     </delete>
+
     <update id="updateUser">
         UPDATE ${table_name} SET username = '${puname}', age = ${page} where id = ${pid}
     </update>
-    <insert id="addClient">
-        insert into ${table_name} (email, username, salted_password, salt, privilege) values (#{pemail}, #{puname}, #{spassword},
-                                                                                              #{salt}, #{privilege})
-    </insert>
+
     <select id="getUserList" resultType="com.annyw.pojo.User" parameterType="String">
         select * from ${table_name} where age &lt; 20
     </select>
+
     <select id="getAllUsers" resultType="com.annyw.pojo.User" parameterType="String">
         select * from ${table_name}
-    </select>
-    <select id="count" parameterType="String">
-        select count(*) from ${table_name}
-    </select>
-
-    <select id="matchUsername" resultType="int" >
-        select count(*) from ${table_name} where username = '${puname}';
-    </select>
-
-    <select id="matchPassword" resultType="com.annyw.pojo.Client">
-        select * from ${table_name} where username = '${puname}' and salted_password = '${pwd}';
-    </select>
-
-    <select id="getAllClients" resultType="com.annyw.pojo.Client" parameterType="String">
-        select * from ${table_name}
-    </select>
-
-    <select id="getSalt" resultType="String">
-        select salt from ${table_name} where username = '${puname}'
     </select>
 </mapper>
