@@ -19,7 +19,7 @@ public class DeleteUser extends HttpServlet {
          mapper.deleteUser(table_name, Integer.parseInt(request.getParameter("deleted")));
          this.sqlSession.commit();
          request.setAttribute("pageS", request.getParameter("pageS"));
-         request.getRequestDispatcher("QueryUserByPage").forward(request, response);
+         request.getRequestDispatcher("/admin/EditUserByPage").forward(request, response);
      }
      catch (Exception e) {
          e.printStackTrace();

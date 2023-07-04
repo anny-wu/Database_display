@@ -35,20 +35,22 @@ public class Login extends HttpServlet {
         }
         //Check password for the username entered
         String password = request.getParameter("password");
+        //Store user in session
+        HttpSession session = request.getSession();
+        username = username.substring(0, 1).toUpperCase() + username.substring(1).toLowerCase();
         Client client = service.login(username,password);
+        session.setAttribute("username", username);
+        
         if(client == null) {
             //Return to home with password error
             //System.out.println("password");
+            session.setAttribute("username", null);
             request.setAttribute("perror", "Incorrect password");
             request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
         }
-    
-        //Store user in session
-        HttpSession session = request.getSession();
-        session.setAttribute("username", username);
-        session.setAttribute("admin", client.getPrivillege());
-        System.out.println("======");
+        session.setAttribute("admin", client.getPrivilege());
+        
         //Jump to Home
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }

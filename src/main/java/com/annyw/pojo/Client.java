@@ -1,16 +1,35 @@
 package com.annyw.pojo;
 
+import java.util.Arrays;
+
 public class Client {
+    String email;
     int id;
     String username;
-    String password;
-    String privillege;
+    String salted_password;
+    String salt;
+    String privilege;
     
-    public Client(int id, String username,  String password, String privillege) {
+    
+    public Client(String email, int id, String username, String salted_password,  String salt, String privilege) {
+        this.email = email;
         this.id = id;
         this.username = username;
-        this.password = password;
-        this.privillege = privillege;
+        this.salted_password = salted_password;
+        this.salt = salt;
+        this.privilege = privilege;
+    }
+    
+    public Client() {
+    
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     public int getId() {
@@ -29,29 +48,39 @@ public class Client {
         this.username = username;
     }
     
-    public String getPassword() {
-        return password;
+    public String getSaltedPassword() {
+        return salted_password;
     }
     
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSaltedPassword(String salted_password) {
+        this.salted_password = salted_password;
     }
     
-    public String getPrivillege() {
-        return privillege;
+    public String getSalt() {
+        return salt;
     }
     
-    public void setPrivillege(String privillege) {
-        this.privillege = privillege;
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+    
+    public String getPrivilege() {
+        return privilege;
+    }
+    
+    public void setPrivilege(String privillege) {
+        this.privilege = privillege;
     }
     
     @Override
     public String toString() {
         return "Client{" +
-            "id=" + id +
-            ", username=" + username +
-            ", password=" + password +
-            ", privillege='" + privillege + '\'' +
+            "email='" + email + '\'' +
+            ", id=" + id +
+            ", username='" + username + '\'' +
+            ", salted_password='" + salted_password + '\'' +
+            ", salt=" + salt +
+            ", privillege='" + privilege + '\'' +
             '}';
     }
 }

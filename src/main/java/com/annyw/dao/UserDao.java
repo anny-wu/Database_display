@@ -23,9 +23,10 @@ public interface UserDao {
     void updateUser(@Param("table_name") String table_name, @Param("pid") int id, @Param("puname") String username,
         @Param("page") int age);
     //Add a client to the table PRIVILLEGE
-    void addClient(@Param("table_name") String table_name, @Param("puname") String username,
-        @Param("password") String password,
-        @Param("privillege") String privillege);
+    void addClient(@Param("table_name") String table_name,
+        @Param("pemail") String email, @Param("puname") String username,
+        @Param("spassword") String salted_password, @Param("salt") String salt,
+        @Param("privilege") String privilege);
     //Perform an user query in the table USER
     List<User> getUserList(String name);
     //Get all items in a table
@@ -33,7 +34,11 @@ public interface UserDao {
     //Check if there is a match in the database for the username entered
     int matchUsername(@Param("table_name") String table_name, @Param("puname") String username);
     List<Client> matchPassword(@Param("table_name") String table_name, @Param("puname") String username,
-        @Param("pwd") String password);
+        @Param("pwd") String salted_password);
+    //Get salt for the given user
+    List<String> getSalt(@Param("table_name") String table_name, @Param("puname") String username);
     
+    //Get all items in a table
+    List<User> getAllClients(String name);
 }
 

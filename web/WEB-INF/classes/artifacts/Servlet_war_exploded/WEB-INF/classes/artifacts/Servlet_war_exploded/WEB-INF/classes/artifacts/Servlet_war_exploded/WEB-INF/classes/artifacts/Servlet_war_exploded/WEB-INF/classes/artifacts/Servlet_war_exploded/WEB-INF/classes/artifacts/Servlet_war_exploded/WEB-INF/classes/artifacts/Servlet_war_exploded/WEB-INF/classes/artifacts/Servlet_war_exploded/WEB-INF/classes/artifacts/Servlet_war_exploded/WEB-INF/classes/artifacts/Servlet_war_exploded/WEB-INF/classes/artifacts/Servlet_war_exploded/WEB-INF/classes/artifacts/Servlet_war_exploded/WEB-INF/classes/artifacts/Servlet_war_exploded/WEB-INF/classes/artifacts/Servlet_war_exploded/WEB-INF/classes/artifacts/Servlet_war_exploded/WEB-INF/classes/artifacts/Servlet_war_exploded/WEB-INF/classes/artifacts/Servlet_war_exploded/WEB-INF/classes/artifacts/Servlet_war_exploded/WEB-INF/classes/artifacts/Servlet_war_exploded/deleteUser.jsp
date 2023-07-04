@@ -56,6 +56,7 @@
 <div class="row">
     <div class="col-8 m-auto back">
         <form>
+            <input type="hidden" name="pageS" value="<%=request.getParameter("pageS")%>">
             <input type="hidden" id="deleted" name="deleted" value="1">
             <div class="form-group row">
                 <label class="flabel col-2 col-form-label"><strong>TABLE NAME</strong></label>
@@ -104,10 +105,10 @@
 %>
             <div id="buttons">
                 <div>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="DeleteUser"
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="admin/DeleteUser"
                             onclick="setValue()">Delete
                     </button>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="QueryUserByPage">Back
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="EditUserByPage">Back
                     </button>
                 </div>
             </div>

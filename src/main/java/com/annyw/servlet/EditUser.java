@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class EditUser extends HttpServlet {
     SqlSession sqlSession;
@@ -20,7 +21,16 @@ public class EditUser extends HttpServlet {
              "username"), Integer.parseInt(request.getParameter("age")));
          this.sqlSession.commit();
          request.setAttribute("pageS", request.getParameter("pageS"));
-         request.getRequestDispatcher("QueryUserByPage").forward(request, response);
+         
+         if(request.getParameter("type").equals("admin")){
+             System.out.println("admin");
+             response.sendRedirect("../admin/EditUserByPage");
+         }
+         else {
+             System.out.println("user");
+             response.sendRedirect("../user/QueryUserByPage");
+             
+         }
      }
      catch (Exception e) {
          e.printStackTrace();

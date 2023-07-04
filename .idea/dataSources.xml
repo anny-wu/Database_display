@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="DB@127.0.0.1" uuid="2f7fc723-6698-48d3-9456-9cdec0d3ab12">
+    <data-source source="LOCAL" name="MySQL" uuid="b95e1fa6-5e05-4e7b-a3fd-b9e2a8def762">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1:3306/DB?useSSl=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="DB@127.0.0.1 [2]" uuid="dd87e4d5-23c9-4a3e-9079-9df83217d075">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1:3306/DB?useSSl=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai&amp;allowMultiQueries=true</jdbc-url>
+      <jdbc-url>jdbc:mysql://127.0.0.1:3306/DB?useSSl=true&amp;useUnicode=truecharacterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai&amp;allowMultiQueries=true</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

@@ -21,7 +21,7 @@ public class AddUser extends HttpServlet {
              Integer.parseInt(request.getParameter("age")));
          this.sqlSession.commit();
          request.setAttribute("pageS", request.getParameter("pageS"));
-         request.getRequestDispatcher("QueryUserByPage").forward(request, response);
+         request.getRequestDispatcher("/admin/EditUserByPage").forward(request, response);
      }
      catch (Exception e) {
          e.printStackTrace();

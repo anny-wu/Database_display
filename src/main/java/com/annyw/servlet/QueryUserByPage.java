@@ -42,7 +42,7 @@ public class QueryUserByPage extends HttpServlet{
         request.setAttribute("page", page);
         request.setAttribute("pageS", pageSize);
         request.setAttribute("count", count);
-        request.getRequestDispatcher("filtered.jsp").forward(request, response);
+        request.getRequestDispatcher("/user/filtered.jsp").forward(request, response);
         
         
     }

@@ -40,21 +40,33 @@
     <update id="updateUser">
         UPDATE ${table_name} SET username = '${puname}', age = ${page} where id = ${pid}
     </update>
+    <insert id="addClient">
+        insert into ${table_name} (email, username, salted_password, salt, privilege) values (#{pemail}, #{puname}, #{spassword},
+                                                                                              #{salt}, #{privilege})
+    </insert>
     <select id="getUserList" resultType="com.annyw.pojo.User" parameterType="String">
-        select * from ${name} where age &lt; 20
+        select * from ${table_name} where age &lt; 20
     </select>
     <select id="getAllUsers" resultType="com.annyw.pojo.User" parameterType="String">
-        select * from ${name}
+        select * from ${table_name}
     </select>
-    <select id="count" resultType="com.annyw.pojo.User" parameterType="String">
-        select count(*) from ${name}
-    </select>
-
-    <select id="matchUsername" resultType="com.annyw.pojo.Client" >
-        select count(*) from ${name} where username = '${puname}'
+    <select id="count" parameterType="String">
+        select count(*) from ${table_name}
     </select>
 
-    <select id="matchPassword" resultType="com.annyw.pojo.Client" >
-        select * from ${name} where username = '${puname}' and password = '${pwd}'
+    <select id="matchUsername" resultType="int" >
+        select count(*) from ${table_name} where username = '${puname}';
+    </select>
+
+    <select id="matchPassword" resultType="com.annyw.pojo.Client">
+        select * from ${table_name} where username = '${puname}' and salted_password = '${pwd}';
+    </select>
+
+    <select id="getAllClients" resultType="com.annyw.pojo.Client" parameterType="String">
+        select * from ${table_name}
+    </select>
+
+    <select id="getSalt" resultType="byte[]">
+        select salt from ${table_name} where username = '${puname}'
     </select>
 </mapper>

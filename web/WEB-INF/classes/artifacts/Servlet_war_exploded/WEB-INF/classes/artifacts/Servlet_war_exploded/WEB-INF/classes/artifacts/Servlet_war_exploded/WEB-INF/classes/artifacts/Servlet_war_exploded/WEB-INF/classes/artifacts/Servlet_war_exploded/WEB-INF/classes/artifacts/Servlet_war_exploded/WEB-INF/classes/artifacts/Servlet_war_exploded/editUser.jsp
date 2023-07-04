@@ -61,6 +61,7 @@
                 <form>
                     <input type="hidden" name="pageS" value="<%=request.getParameter("pageS")%>">
                     <input type="hidden" id="selected" name="selected" value="1">
+                    <input type="hidden" name="type" value="<%=request.getParameter("type")%>">
                     <div class="form-group row">
                         <label class="flabel col-2 col-form-label"><strong>TABLE NAME</strong></label>
                         <div class="col-4">
@@ -120,10 +121,19 @@
                     </div>
                     <div id="buttons">
                         <div>
+                            <%if(request.getParameter("type").equals("user")){%>
                             <button id="edit" type="submit" class="btn btn-lg btn-primary controlB disabled"
-                                    formaction="EditUser">Edit
+                                    formaction="user/EditUser">Edit
                             </button>
-                            <button type="submit" class="btn btn-lg btn-primary controlB" formaction="QueryUserByPage">Back</button>
+                            <button type="submit" class="btn btn-lg btn-primary controlB"
+                                    formaction="user/QueryUserByPage">Back</button>
+                            <%}else{%>
+                            <button id="edit" type="submit" class="btn btn-lg btn-primary controlB disabled"
+                                    formaction="admin/AdminEdit">Edit
+                            </button>
+                            <button type="submit" class="btn btn-lg btn-primary controlB"
+                                    formaction="admin/EditUserByPage">Back</button>
+                            <%}%>
                         </div>
                     </div>
                     </form>

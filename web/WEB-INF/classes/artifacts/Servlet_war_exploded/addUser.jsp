@@ -100,8 +100,9 @@
             <div id="buttons">
                 <div>
                     <button id="add" type="submit" class="btn btn-lg btn-primary controlB disabled"
-                    formaction="AddUser">Add</button>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="QueryUserByPage">Back</button>
+                    formaction="admin/AddUser">Add</button>
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="admin/EditUserByPage">Back
+                    </button>
                 </div>
             </div>
         </form>

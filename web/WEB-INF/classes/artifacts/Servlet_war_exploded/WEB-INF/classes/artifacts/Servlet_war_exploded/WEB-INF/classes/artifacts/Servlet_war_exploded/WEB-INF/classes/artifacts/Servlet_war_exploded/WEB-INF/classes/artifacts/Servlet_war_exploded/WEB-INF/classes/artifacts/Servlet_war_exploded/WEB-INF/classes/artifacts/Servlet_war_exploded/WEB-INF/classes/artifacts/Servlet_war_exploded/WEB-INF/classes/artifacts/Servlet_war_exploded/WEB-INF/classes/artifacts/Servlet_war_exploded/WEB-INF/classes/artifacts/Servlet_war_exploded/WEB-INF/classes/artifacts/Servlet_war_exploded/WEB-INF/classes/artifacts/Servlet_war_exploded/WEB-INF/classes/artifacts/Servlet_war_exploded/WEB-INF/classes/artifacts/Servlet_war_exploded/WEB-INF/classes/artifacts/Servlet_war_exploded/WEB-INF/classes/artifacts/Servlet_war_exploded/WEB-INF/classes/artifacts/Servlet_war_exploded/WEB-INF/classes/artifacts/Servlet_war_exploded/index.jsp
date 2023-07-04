@@ -12,13 +12,24 @@
           integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 </head>
 <style>
+  .errormsg{
+    color:red;
+  }
+  .form-control{
+    width:500px;
+  }
   .flabel{
     margin-top: 20px;
   }
+
+  .controls{
+    width:200px;
+  }
+
   #showpassword{
     float:right;
-    margin-left: 10px;
     margin-top: -25px;
+    right:10px;
     position: relative;
     z-index: 2;
   }
@@ -26,31 +37,48 @@
 <body>
 <div class="cover-container d-flex h-100 p-3 flex-column align-items-center justify-content-center">
   <h1>Welcome to Database Users</h1>
-  <c:if test="${username == null}">
-    <form action="Login" onsubmit="validate();">
-      <div class="row">
+  <c:if test="${sessionScope.username == null}">
+    <form method="post">
+      <div>
         <label class="flabel"><strong>Username</strong></label>
-          <input type="text" class="form-control" name="username"
+        <input type="text" class="form-control" name="username"
                  aria-describedby="usernameHelp'"
                  placeholder="username">
-      </div>
-      <div class="row">
+        <span class="errormsg">${uerror}</span>
+        </div>
+      <div>
         <label class="flabel"><strong>Password</strong></label>
-        <input type="password" class="form-control" name="password"
+        <input  type="password" class="form-control" name="password"
                aria-describedby="passwordHelp"
                placeholder="password">
+        <i id="showpassword" class="bi bi-eye-slash"></i>
+        <span class="errormsg">${perror}</span>
       </div>
-      <i id="showpassword" class="bi bi-eye-slash"></i>
-      <div class="row">
-        <button class="flabel btn btn-info" type="submit">Login</button>
+      <div>
+      <div class="row text-center">
+        <div>
+          <button class="controls flabel btn btn-info" type="submit"  formaction="Login">Log In</button>
+        </div>
+        <div>
+          <button class="controls flabel btn btn-info" type="submit" formaction="signup.jsp">Sign up</button>
+        </div>
+
+
+      </div>
       </div>
     </form>
 
   </c:if>
-  <c:if test="${username != null}">
+  <c:if test="${sessionScope.username != null}">
     Log in as : ${username}
-    <form action="QueryUserByPage">
-      <button class="btn btn-info" type="submit">Go to database</button>
+    <span class="errormsg">${sessionScope.msg}</span>
+    <form>
+      <div class="row">
+        <button class="flabel btn btn-info" type="submit" formaction="admin/EditUserByPage">Log In As Admin</button>
+      </div>
+      <div class="row">
+        <button class="flabel  btn btn-info" type="submit" formaction="user/QueryUserByPage">Log In As User</button>
+      </div>
     </form>
   </c:if>
 

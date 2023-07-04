@@ -105,10 +105,10 @@
 %>
             <div id="buttons">
                 <div>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="DeleteUser"
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="admin/DeleteUser"
                             onclick="setValue()">Delete
                     </button>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="QueryUserByPage">Back
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="EditUserByPage">Back
                     </button>
                 </div>
             </div>

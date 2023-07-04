@@ -11,6 +11,14 @@
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.annyw.servlet.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>QueryUserByPage</servlet-name>
@@ -18,15 +26,25 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>QueryUserByPage</servlet-name>
-        <url-pattern>/QueryUserByPage</url-pattern>
+        <url-pattern>/user/QueryUserByPage</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditUserByPage</servlet-name>
+        <servlet-class>com.annyw.servlet.EditUserByPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditUserByPage</servlet-name>
+        <url-pattern>/admin/EditUserByPage</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>AddUser</servlet-name>
         <servlet-class>com.annyw.servlet.AddUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddUser</servlet-name>
-        <url-pattern>/AddUser</url-pattern>
+        <url-pattern>/admin/AddUser</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>DeleteUser</servlet-name>
@@ -34,7 +52,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteUser</servlet-name>
-        <url-pattern>/DeleteUser</url-pattern>
+        <url-pattern>/admin/DeleteUser</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>EditUser</servlet-name>
@@ -42,7 +60,32 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>EditUser</servlet-name>
-        <url-pattern>/EditUser</url-pattern>
+        <url-pattern>/user/EditUser</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminEdit</servlet-name>
+        <servlet-class>com.annyw.servlet.AdminEdit</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminEdit</servlet-name>
+        <url-pattern>/admin/AdminEdit</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>com.annyw.filter.UserFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>com.annyw.filter.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/user/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
 

@@ -50,6 +50,7 @@
 <div class="row">
     <div class="col-8 m-auto back">
         <form>
+            <input type="hidden" name="pageS" value="<%=request.getParameter("pageS")%>">
             <div class="form-group row">
                 <%
                     Class<?> cls = Class.forName("com.annyw.pojo.User");
@@ -85,7 +86,7 @@
                     <label class="flabel col-2 col-form-label"><strong><%=fname%></strong></label>
 
                     <div class="form-outline w-50">
-                        <input type="<%=fields[i].getName()%>" class="form-control" name="<%=fields[i].getName()%>"
+                        <input type="<%=fields[i].getName()%>" class="form-control edit" name="<%=fields[i].getName()%>"
                                aria-describedby="<%=fields[i].getName()%>+'Help'"
                                placeholder="<%=fields[i].getName()%>">
                     </div>
@@ -98,13 +99,31 @@
             </div>
             <div id="buttons">
                 <div>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="AddUser">Add</button>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="QueryUserByPage">Back</button>
+                    <button id="add" type="submit" class="btn btn-lg btn-primary controlB disabled"
+                    formaction="admin/AddUser">Add</button>
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="admin/EditUserByPage">Back
+                    </button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
 </body>
+<script>
+        $('.edit').on('input',function() {
+            var empty = false;
+            $('.edit').each(function() {
+                if ($(this).val() == '') {
+                    empty = true;
+                }
+            });
+
+            if (empty) {
+                $('#add').addClass('disabled');
+            }
+            else{
+                $('#add').removeClass('disabled');
+            }
+        });
+</script>
 </html>

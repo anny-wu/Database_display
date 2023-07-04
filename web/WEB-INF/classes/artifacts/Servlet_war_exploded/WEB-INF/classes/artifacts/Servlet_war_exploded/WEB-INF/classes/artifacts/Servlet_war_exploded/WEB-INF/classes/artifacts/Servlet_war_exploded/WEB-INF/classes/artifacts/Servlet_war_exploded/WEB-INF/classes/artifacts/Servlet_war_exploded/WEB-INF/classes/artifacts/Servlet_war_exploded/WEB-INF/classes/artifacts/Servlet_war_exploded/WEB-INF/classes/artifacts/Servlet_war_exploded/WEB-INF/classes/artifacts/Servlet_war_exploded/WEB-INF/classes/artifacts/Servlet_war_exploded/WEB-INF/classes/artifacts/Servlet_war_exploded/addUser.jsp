@@ -99,9 +99,10 @@
             </div>
             <div id="buttons">
                 <div>
-                    <button id="add" type="submit" class="btn btn-lg btn-primary controlB"
-                    formaction="AddUser">Add</button>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="QueryUserByPage">Back</button>
+                    <button id="add" type="submit" class="btn btn-lg btn-primary controlB disabled"
+                    formaction="admin/AddUser">Add</button>
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="admin/EditUserByPage">Back
+                    </button>
                 </div>
             </div>
         </form>
@@ -109,16 +110,14 @@
 </div>
 </body>
 <script>
-        $('.edit').on('input',function(e) {
+        $('.edit').on('input',function() {
             var empty = false;
             $('.edit').each(function() {
                 if ($(this).val() == '') {
                     empty = true;
-                    alert(1);
                 }
             });
 
-            alert(empty);
             if (empty) {
                 $('#add').addClass('disabled');
             }

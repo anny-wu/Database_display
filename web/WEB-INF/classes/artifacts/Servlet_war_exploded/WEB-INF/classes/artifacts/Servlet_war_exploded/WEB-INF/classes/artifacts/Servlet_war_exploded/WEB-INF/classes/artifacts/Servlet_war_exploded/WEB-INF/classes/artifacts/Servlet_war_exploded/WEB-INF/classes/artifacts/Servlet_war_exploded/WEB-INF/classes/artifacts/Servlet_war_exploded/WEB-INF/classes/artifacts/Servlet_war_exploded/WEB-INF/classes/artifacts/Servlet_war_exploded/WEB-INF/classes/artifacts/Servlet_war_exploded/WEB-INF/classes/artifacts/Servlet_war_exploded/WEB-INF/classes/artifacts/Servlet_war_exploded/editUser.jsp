@@ -1,5 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="com.annyw.pojo.Page" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@page import="com.annyw.pojo.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.reflect.Field" %>
@@ -60,7 +59,9 @@
 <div class="row">
     <div class="col-8 m-auto back">
                 <form>
-                    <input type="hidden" id="deleted" name="seleted" value="1">
+                    <input type="hidden" name="pageS" value="<%=request.getParameter("pageS")%>">
+                    <input type="hidden" id="selected" name="selected" value="1">
+                    <input type="hidden" name="type" value="<%=request.getParameter("type")%>">
                     <div class="form-group row">
                         <label class="flabel col-2 col-form-label"><strong>TABLE NAME</strong></label>
                         <div class="col-4">
@@ -107,7 +108,7 @@
                             <label class="flabel col-2 col-form-label"><strong><%=fname%></strong></label>
 
                             <div class="form-outline w-50">
-                                <input type="<%=fields[i].getName()%>" class="form-control" id="<%=fields[i].getName()%>" name="<%=fields[i].getName()%>"
+                                <input type="<%=fields[i].getName()%>" class="form-control edit" id="<%=fields[i].getName()%>" name="<%=fields[i].getName()%>"
                                        aria-describedby="<%=fields[i].getName()%>+'Help'"
                                        placeholder="<%=fields[i].getName()%>">
                             </div>
@@ -120,13 +121,24 @@
                     </div>
                     <div id="buttons">
                         <div>
-                            <button type="submit" class="btn btn-lg btn-primary controlB" formaction="EditUser">Edit
+                            <%if(request.getParameter("type").equals("user")){%>
+                            <button id="edit" type="submit" class="btn btn-lg btn-primary controlB disabled"
+                                    formaction="user/EditUser">Edit
                             </button>
-                            <button type="submit" class="btn btn-lg btn-primary controlB" formaction="QueryUserByPage">Back</button>
+                            <button type="submit" class="btn btn-lg btn-primary controlB"
+                                    formaction="user/QueryUserByPage">Back</button>
+                            <%}else{%>
+                            <button id="edit" type="submit" class="btn btn-lg btn-primary controlB disabled"
+                                    formaction="admin/AdminEdit">Edit
+                            </button>
+                            <button type="submit" class="btn btn-lg btn-primary controlB"
+                                    formaction="admin/EditUserByPage">Back</button>
+                            <%}%>
                         </div>
                     </div>
                     </form>
-
+    </div>
+</div>
                         <%}
                 }
 
@@ -139,14 +151,28 @@
                 }
             }
                 %>
-    </div>
-</div>
+
 </body>
 <script>
     $(document).ready(function() {
         $('#selectS').change(function () {
-            $("#seleted").attr("value", $("#selectS").val());
+            $("#selected").attr("value", $("#selectS").val());
         });
+        $('.edit').on('input',function() {
+            var empty = false;
+            $('.edit').each(function() {
+                if ($(this).val() == '') {
+                    empty = true;
+                }
+            });
+
+            if (empty) {
+                $('#edit').addClass('disabled');
+            }
+            else{
+                $('#edit').removeClass('disabled');
+            }
+         });
     });
 </script>
 </html>
