@@ -12,8 +12,9 @@ public class MybatisUtils {
     private static SqlSessionFactory sqlSessionFactory = null;
     
     //Create sqlSessionFactory
-    public static SqlSessionFactory createFactory() throws IOException {
-        if(sqlSessionFactory == null){
+    public static SqlSessionFactory createFactory()
+        throws IOException {
+        if (sqlSessionFactory == null) {
             String resource = "mybatis-config.xml";
             InputStream inputStream = Resources.getResourceAsStream(resource);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
@@ -21,8 +22,10 @@ public class MybatisUtils {
         }
         return sqlSessionFactory;
     }
+    
     //Create sqlSession
-    public static SqlSession getSqlSession() throws IOException {
+    public static SqlSession getSqlSession()
+        throws IOException {
         return createFactory().openSession();
     }
     

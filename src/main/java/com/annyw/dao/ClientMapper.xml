@@ -6,7 +6,7 @@
 <mapper namespace="com.annyw.dao.ClientDao">
     <insert id="addClient">
         insert into ${table_name} (email, username, salted_password, salt, privilege) values (#{pemail}, #{puname}, #{spassword},
-                                                                                              #{salt}, #{privilege})
+                                                                                              #{salt}, #{privilege});
     </insert>
 
     <select id="matchUsername" resultType="int">

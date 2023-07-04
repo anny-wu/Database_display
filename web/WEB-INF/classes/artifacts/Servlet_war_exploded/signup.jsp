@@ -47,7 +47,8 @@
 <body>
 <div class="cover-container d-flex h-100 flex-column align-items-center justify-content-center">
     <h1>Register</h1>
-    <form method="post" action="Register">
+    <form method="post" action="Access">
+        <input type="hidden" name="action" value="register">
             <div>
                 <label class="flabel"><strong>Email</strong></label>
                 <input type="text" class="form-control" name="email"

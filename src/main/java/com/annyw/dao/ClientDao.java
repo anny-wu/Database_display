@@ -15,6 +15,7 @@ public interface ClientDao {
     //Check if there is a match in the database for the username entered
     int matchUsername(@Param("table_name") String table_name, @Param("puname") String username);
     
+    //Check if the stored password matches user entered password
     List<Client> matchPassword(@Param("table_name") String table_name, @Param("puname") String username,
         @Param("pwd") String salted_password);
     

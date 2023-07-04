@@ -12,12 +12,20 @@
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>Logout</servlet-name>
-        <servlet-class>com.annyw.servlet.Logout</servlet-class>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>com.annyw.servlet.Register</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Logout</servlet-name>
-        <url-pattern>/Logout</url-pattern>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Access</servlet-name>
+        <servlet-class>com.annyw.servlet.Access</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Access</servlet-name>
+        <url-pattern>/Access</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -39,12 +47,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AddUser</servlet-name>
-        <servlet-class>com.annyw.servlet.AddUser</servlet-class>
+        <servlet-name>Interaction</servlet-name>
+        <servlet-class>com.annyw.servlet.Interaction</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AddUser</servlet-name>
-        <url-pattern>/admin/AddUser</url-pattern>
+        <servlet-name>Interaction</servlet-name>
+        <url-pattern>/Interaction</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>DeleteUser</servlet-name>

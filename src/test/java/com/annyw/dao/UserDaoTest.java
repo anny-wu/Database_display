@@ -49,7 +49,7 @@ public class UserDaoTest {
             System.out.println();
             
             System.out.println("Add user Tom:");
-            mapper.addUser("USER",  "Tom", 18);
+            mapper.addUser("USER", "Tom", 18);
             
             userList = mapper.getAllUsers("USER");
             itr = userList.iterator();

@@ -3,6 +3,7 @@ package com.annyw.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+
 public class Salt {
     public static String getSecurePassword(String password, byte[] salt) {
         
@@ -21,13 +22,15 @@ public class Salt {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
+        }
+        catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         return generatedPassword;
     }
     
-    public static byte[] getSalt() throws NoSuchAlgorithmException {
+    public static byte[] getSalt()
+        throws NoSuchAlgorithmException {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);

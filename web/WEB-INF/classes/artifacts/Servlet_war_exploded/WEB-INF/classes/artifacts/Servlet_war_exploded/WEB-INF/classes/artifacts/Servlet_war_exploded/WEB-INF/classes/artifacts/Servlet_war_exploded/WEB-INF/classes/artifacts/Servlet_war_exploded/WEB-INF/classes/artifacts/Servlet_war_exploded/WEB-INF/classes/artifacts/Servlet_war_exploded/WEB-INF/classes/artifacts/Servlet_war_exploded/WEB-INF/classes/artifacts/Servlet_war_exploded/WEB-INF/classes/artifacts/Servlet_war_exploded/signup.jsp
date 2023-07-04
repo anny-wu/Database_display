@@ -21,6 +21,10 @@
         margin-top: 20px;
     }
 
+    .controls{
+        width:200px;
+    }
+
     .form-control{
         width:500px;
     }
@@ -28,7 +32,7 @@
     #showpassword{
         float:right;
         margin-top: -25px;
-        right:10px;
+        right:40px;
         position: relative;
         z-index: 2;
     }
@@ -42,10 +46,10 @@
 <body>
 <div class="cover-container d-flex h-100 flex-column align-items-center justify-content-center">
     <h1>Register</h1>
-    <form method="post" action="index.jsp">
+    <form method="post" action="Register">
             <div>
                 <label class="flabel"><strong>Email</strong></label>
-                <input type="email" class="form-control" name="email"
+                <input type="text" class="form-control" name="email"
                        aria-describedby="emailHelp"
                        placeholder="email" id="email">
                 <span class="error" id="emailerror"></span>
@@ -55,7 +59,7 @@
             <input type="text" class="form-control" name="username"
                    aria-describedby="usernameHelp'"
                    placeholder="username" id="username">
-            <span class="error" id="unameerror"></span>
+            <span class="error" id="unameerror">${unameerror}</span>
         </div>
         <div>
             <label class="flabel"><strong>Password</strong></label>
@@ -74,9 +78,19 @@
             <span class="error" id="confirmerror"></span>
         </div>
 
+        <div>
+            <label class="flabel"><strong>Admin Code</strong>(optional)</label>
+            <input type="text" class="form-control" name="privilege"
+                   aria-describedby="privilegeHelp"
+                   placeholder="admin code" id="privilege">
+        </div>
+
 
         <div class="row">
-            <button class="flabel btn btn-info" type="submit" onclick="return validateForm()">Sign up</button>
+            <button class="controls flabel btn btn-info" type="submit" onclick="return validateForm()">Sign up</button>
+        </div>
+        <div class="row">
+            <button class="controls flabel btn btn-info" type="submit" formaction="index.jsp">Back</button>
         </div>
     </form>
 </div>
@@ -133,14 +147,14 @@
     }
 
     function validatePassword(){
-        var password = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        var password = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,12}$/;
         var val = $("#password").val();
         if(val != null && val != ""){
             if(val.match(password)) {
                 $("#password").focus();
                 return true;
             }
-            $("#pwderror").text("Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character");
+            $("#pwderror").text("Password must be 8-12 characters, one uppercase, one lowercase, one number and one special character");
             $("#password").focus();
             return false;
         }else{

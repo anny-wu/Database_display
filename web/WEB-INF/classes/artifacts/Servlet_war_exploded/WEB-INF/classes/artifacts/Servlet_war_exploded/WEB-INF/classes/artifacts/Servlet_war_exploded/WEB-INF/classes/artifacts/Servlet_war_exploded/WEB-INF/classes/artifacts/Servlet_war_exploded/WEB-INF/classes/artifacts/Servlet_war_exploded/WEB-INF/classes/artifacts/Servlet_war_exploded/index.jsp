@@ -62,8 +62,6 @@
         <div>
           <button class="controls flabel btn btn-info" type="submit" formaction="signup.jsp">Sign up</button>
         </div>
-
-
       </div>
       </div>
     </form>
@@ -73,11 +71,14 @@
     Log in as : ${username}
     <span class="errormsg">${sessionScope.msg}</span>
     <form>
+      <%System.out.println(session.getAttribute("admin"));%>
       <div class="row">
-        <button class="flabel btn btn-info" type="submit" formaction="admin/EditUserByPage">Log In As Admin</button>
+        <button class="flabel btn btn-info" type="submit" name="admin" formaction="EditUserByPage">Log In As
+        Admin</button>
       </div>
       <div class="row">
-        <button class="flabel  btn btn-info" type="submit" formaction="user/QueryUserByPage">Log In As User</button>
+        <button class="flabel  btn btn-info" type="submit" name= "user" formaction="EditUserByPage">Log In As
+        User</button>
       </div>
     </form>
   </c:if>
@@ -96,6 +97,7 @@ $("#showpassword").on("click", function(){
       $("input[name='password']").attr("type","text");
     }
 });
+
 </script>
 </html>
 

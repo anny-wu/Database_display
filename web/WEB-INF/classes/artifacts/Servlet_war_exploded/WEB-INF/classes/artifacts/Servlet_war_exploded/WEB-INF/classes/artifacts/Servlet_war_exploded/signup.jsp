@@ -23,7 +23,6 @@
 
     .controls{
         width:200px;
-        text-align: center;
     }
 
     .form-control{
@@ -48,7 +47,8 @@
 <body>
 <div class="cover-container d-flex h-100 flex-column align-items-center justify-content-center">
     <h1>Register</h1>
-    <form method="post" action="Register">
+    <form method="post" action="Access">
+        <input type="hidden" name="action" value="register">
             <div>
                 <label class="flabel"><strong>Email</strong></label>
                 <input type="text" class="form-control" name="email"
@@ -88,10 +88,10 @@
         </div>
 
 
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             <button class="controls flabel btn btn-info" type="submit" onclick="return validateForm()">Sign up</button>
         </div>
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             <button class="controls flabel btn btn-info" type="submit" formaction="index.jsp">Back</button>
         </div>
     </form>

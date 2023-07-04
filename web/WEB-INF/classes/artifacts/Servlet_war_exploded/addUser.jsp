@@ -51,6 +51,7 @@
     <div class="col-8 m-auto back">
         <form>
             <input type="hidden" name="pageS" value="<%=request.getParameter("pageS")%>">
+            <input type="hidden" name="action" value="add">
             <div class="form-group row">
                 <%
                     Class<?> cls = Class.forName("com.annyw.pojo.User");
@@ -100,8 +101,8 @@
             <div id="buttons">
                 <div>
                     <button id="add" type="submit" class="btn btn-lg btn-primary controlB disabled"
-                    formaction="admin/AddUser">Add</button>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="admin/EditUserByPage">Back
+                    formaction="user/Interaction">Add</button>
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="user/EditUserByPage">Back
                     </button>
                 </div>
             </div>

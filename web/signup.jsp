@@ -47,7 +47,8 @@
 <body>
 <div class="cover-container d-flex h-100 flex-column align-items-center justify-content-center">
     <h1>Register</h1>
-    <form method="post" action="Register">
+    <form method="post" action="Access">
+        <input type="hidden" name="action" value="register">
             <div>
                 <label class="flabel"><strong>Email</strong></label>
                 <input type="text" class="form-control" name="email"
@@ -97,6 +98,7 @@
 </div>
 </body>
 <script>
+    //Toggle password visibility
     $("#showpassword").on("click", function(){
         if($("#showpassword").hasClass("bi-eye")){
             $("#showpassword").removeClass("bi-eye");
@@ -114,17 +116,15 @@
     }
 
     function validateEmail(){
-
         var mailformat =
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         ;
-        if($("#email").val().toLowerCase().match(mailformat))
-        {
+        //Check if the email entered has a valid format
+        if($("#email").val().toLowerCase().match(mailformat)) {
             $("#email").focus();
             return true;
         }
-        else
-        {
+        else {
             $("#emailerror").text("Invalid email");
             $("#email").focus();
             return false;
@@ -133,7 +133,9 @@
 
     function validateUsername(){
         var val = $("#username").val();
+        //Check if the username entered has value
         if(val != null && val != ""){
+            //Check if the username entered has only alphanumeric characters
             if(val.match( /^\w+$/)) {
                 $("#username").focus();
                 return true;
@@ -150,7 +152,9 @@
     function validatePassword(){
         var password = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,12}$/;
         var val = $("#password").val();
+        //Check if the username entered has value
         if(val != null && val != ""){
+            /Check if the password is valid
             if(val.match(password)) {
                 $("#password").focus();
                 return true;
@@ -165,6 +169,7 @@
     }
 
     function validateSame(){
+        //Check if the passwords match each other
         if ($("#password").val() == $("#confirm").val()) {
             $("#confirm").focus();
             return true;

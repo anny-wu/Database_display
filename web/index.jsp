@@ -15,17 +15,15 @@
   .errormsg{
     color:red;
   }
-  .form-control{
-    width:500px;
-  }
   .flabel{
     margin-top: 20px;
   }
-
+  .form-control{
+    width:500px;
+  }
   .controls{
     width:200px;
   }
-
   #showpassword{
     float:right;
     margin-top: -25px;
@@ -39,13 +37,14 @@
   <h1>Welcome to Database Users</h1>
   <c:if test="${sessionScope.username == null}">
     <form method="post">
+      <input type="hidden" name="action" value="login">
       <div>
         <label class="flabel"><strong>Username</strong></label>
         <input type="text" class="form-control" name="username"
                  aria-describedby="usernameHelp'"
                  placeholder="username">
         <span class="errormsg">${uerror}</span>
-        </div>
+      </div>
       <div>
         <label class="flabel"><strong>Password</strong></label>
         <input  type="password" class="form-control" name="password"
@@ -55,28 +54,29 @@
         <span class="errormsg">${perror}</span>
       </div>
       <div>
-      <div class="row text-center">
-        <div>
-          <button class="controls flabel btn btn-info" type="submit"  formaction="Login">Log In</button>
+        <div class="row text-center">
+          <div>
+            <button class="controls flabel btn btn-info" type="submit"  formaction="Access">Log In</button>
+          </div>
+          <div>
+            <button class="controls flabel btn btn-info" type="submit" formaction="signup.jsp">Sign up</button>
+          </div>
         </div>
-        <div>
-          <button class="controls flabel btn btn-info" type="submit" formaction="signup.jsp">Sign up</button>
-        </div>
-      </div>
       </div>
     </form>
-
   </c:if>
   <c:if test="${sessionScope.username != null}">
     Log in as : ${username}
     <span class="errormsg">${sessionScope.msg}</span>
-    <form>
-      <%System.out.println(session.getAttribute("admin"));%>
+    <form id="choose">
+      <input type="hidden" id="privilege" name="privilege" value="">
       <div class="row">
-        <button class="flabel btn btn-info" type="submit" formaction="admin/EditUserByPage">Log In As Admin</button>
+        <button class="flabel btn btn-info" type="submit" id="admin" formaction="user/EditUserByPage">Log In As
+        Admin</button>
       </div>
       <div class="row">
-        <button class="flabel  btn btn-info" type="submit" formaction="user/QueryUserByPage">Log In As User</button>
+        <button class="flabel  btn btn-info" type="submit" id="user" formaction="user/EditUserByPage">Log In As
+        User</button>
       </div>
     </form>
   </c:if>
@@ -84,17 +84,29 @@
 </div>
 </body>
 <script>
-$("#showpassword").on("click", function(){
-    if($("#showpassword").hasClass("bi-eye")){
-      $("#showpassword").removeClass("bi-eye");
-      $("#showpassword").addClass("bi-eye-slash");
-      $("input[name='password']").attr("type","password");
-    }else{
-      $("#showpassword").removeClass("bi-eye-slash");
-      $("#showpassword").addClass("bi-eye");
-      $("input[name='password']").attr("type","text");
-    }
-});
+  $(document).ready(function() {
+    //Toggle password visibility
+    $("#showpassword").on("click", function () {
+      if ($("#showpassword").hasClass("bi-eye")) {
+        $("#showpassword").removeClass("bi-eye");
+        $("#showpassword").addClass("bi-eye-slash");
+        $("input[name='password']").attr("type", "password");
+      } else {
+        $("#showpassword").removeClass("bi-eye-slash");
+        $("#showpassword").addClass("bi-eye");
+        $("input[name='password']").attr("type", "text");
+      }
+    });
+    //Get the privilege selected for login
+    let buttonClicked = "";
+    $("#choose button[type = 'submit']").click(function(e){
+      buttonClicked = $(this).attr("id");
+    })
+    $("#choose").submit(function () {
+      $("#privilege").val(buttonClicked);
+    });
+  });
+
 </script>
 </html>
 

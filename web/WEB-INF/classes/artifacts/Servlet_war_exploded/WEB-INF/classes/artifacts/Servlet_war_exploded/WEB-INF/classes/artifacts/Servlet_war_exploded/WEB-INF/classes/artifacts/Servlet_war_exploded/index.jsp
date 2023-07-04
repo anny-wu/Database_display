@@ -62,8 +62,6 @@
         <div>
           <button class="controls flabel btn btn-info" type="submit" formaction="signup.jsp">Sign up</button>
         </div>
-
-
       </div>
       </div>
     </form>
@@ -72,12 +70,15 @@
   <c:if test="${sessionScope.username != null}">
     Log in as : ${username}
     <span class="errormsg">${sessionScope.msg}</span>
-    <form>
+    <form id="choose">
+      <input type="hidden" id="privilege" name="privilege" value="">
       <div class="row">
-        <button class="flabel btn btn-info" type="submit" formaction="admin/EditUserByPage">Log In As Admin</button>
+        <button class="flabel btn btn-info" type="submit" id="admin" formaction="EditUserByPage">Log In As
+        Admin</button>
       </div>
       <div class="row">
-        <button class="flabel  btn btn-info" type="submit" formaction="user/QueryUserByPage">Log In As User</button>
+        <button class="flabel  btn btn-info" type="submit" id="user" formaction="EditUserByPage">Log In As
+        User</button>
       </div>
     </form>
   </c:if>
@@ -85,17 +86,28 @@
 </div>
 </body>
 <script>
-$("#showpassword").on("click", function(){
-    if($("#showpassword").hasClass("bi-eye")){
-      $("#showpassword").removeClass("bi-eye");
-      $("#showpassword").addClass("bi-eye-slash");
-      $("input[name='password']").attr("type","password");
-    }else{
-      $("#showpassword").removeClass("bi-eye-slash");
-      $("#showpassword").addClass("bi-eye");
-      $("input[name='password']").attr("type","text");
-    }
-});
+  $(document).ready(function() {
+
+    $("#showpassword").on("click", function () {
+      if ($("#showpassword").hasClass("bi-eye")) {
+        $("#showpassword").removeClass("bi-eye");
+        $("#showpassword").addClass("bi-eye-slash");
+        $("input[name='password']").attr("type", "password");
+      } else {
+        $("#showpassword").removeClass("bi-eye-slash");
+        $("#showpassword").addClass("bi-eye");
+        $("input[name='password']").attr("type", "text");
+      }
+    });
+    let buttonClicked = "";
+    $("#choose button[type = 'submit']").click(function(e){
+      buttonClicked = $(this).attr("id");
+    })
+    $("#choose").submit(function () {
+      $("#privilege").val(buttonClicked);
+    });
+  });
+
 </script>
 </html>
 

@@ -6,7 +6,10 @@
 <mapper namespace="com.annyw.dao.ClientDao">
     <insert id="addClient">
         insert into ${table_name} (email, username, salted_password, salt, privilege) values (#{pemail}, #{puname}, #{spassword},
-                                                                                              #{salt}, #{privilege})
+                                                                                              #{salt}, #{privilege});
+        ALTER TABLE ${table_name}  DROP id;
+        ALTER TABLE ${table_name}  ADD id int NOT NULL FIRST;
+        ALTER TABLE ${table_name}  MODIFY COLUMN id int NOT NULL AUTO_INCREMENT,ADD PRIMARY KEY(id);
     </insert>
 
     <select id="matchUsername" resultType="int">

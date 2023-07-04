@@ -3,8 +3,8 @@ package com.annyw.dao;
 import com.annyw.pojo.User;
 import com.annyw.util.DBUtil;
 import com.annyw.util.Unboxed;
-
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -13,17 +13,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl{
+public class UserDaoImpl {
     //Display student by page
-    public static List<User> queryUserByPage(String table_name, int currentPage, int pageSize){
+    public static List<User> queryUserByPage(String table_name, int currentPage, int pageSize) {
         
         //Perform the student query in the table
-        String sql = "select * from " + table_name +  " limit ?,?";
+        String sql = "select * from " + table_name + " limit ?,?";
         List<User> users = new ArrayList<>();
-        Object[] params = {(currentPage-1)*pageSize,pageSize};
+        Object[] params = {(currentPage - 1) * pageSize, pageSize};
         ResultSet rs = DBUtil.executeQuery(sql, params);
         
-       try {
+        try {
             while (rs.next()) {
                 //Get Metadata
                 ResultSetMetaData rsmd = (ResultSetMetaData)rs.getMetaData();
@@ -58,19 +58,26 @@ public class UserDaoImpl{
         }
         catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (InstantiationException e) {
+        }
+        catch (InstantiationException e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        }
+        catch (IllegalAccessException e) {
             e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+        }
+        catch (NoSuchMethodException e) {
             e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        }
+        catch (InvocationTargetException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             DBUtil.closeAll(rs, DBUtil.pstmt, DBUtil.con);
         }
         return users;

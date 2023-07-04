@@ -58,6 +58,7 @@
         <form>
             <input type="hidden" name="pageS" value="<%=request.getParameter("pageS")%>">
             <input type="hidden" id="deleted" name="deleted" value="1">
+            <input type="hidden" name="action" value="delete">
             <div class="form-group row">
                 <label class="flabel col-2 col-form-label"><strong>TABLE NAME</strong></label>
                 <div class="col-4">
@@ -105,10 +106,10 @@
 %>
             <div id="buttons">
                 <div>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="admin/DeleteUser"
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="user/Interaction"
                             onclick="setValue()">Delete
                     </button>
-                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="EditUserByPage">Back
+                    <button type="submit" class="btn btn-lg btn-primary controlB" formaction="user/EditUserByPage">Back
                     </button>
                 </div>
             </div>

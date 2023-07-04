@@ -36,17 +36,6 @@
         #controls{
             text-align:right;
         }
-        .controls{
-            border: none;
-            cursor: pointer;
-            padding: 0px;
-        }
-
-        .iconS{
-            width: 30px;
-            height: 30px;
-            fill: #0c6dfd;
-        }
 
         .display{
             margin-top:20px;
@@ -67,15 +56,15 @@
 <div class="row">
     <div class="col-8 m-auto">
         <div id="controls">
-            <form class="display" action="../Logout">
+            <form method="post" class="display" action="../Access">
+                <input type="hidden" name="action" value="logout">
                 <button class="btn btn-secondary" type="submit" value="Logout">Log Out</button>
             </form>
             <div>
-                <form class="display d-flex justify-content-between" method="post">
+                <form id="display" class="display d-flex justify-content-between">
+                    <input type="hidden" id="pageS" name="pageS" value="${pageS}">
                     <div>
                         <input type="hidden" name="table_name" value="${table_name}">
-                        <input type="hidden" name="pageS" value="${pageS}">
-                        <input type="hidden" name="type" value="user">
                         <c:if test="${count > 0}">
                             <button id="edit" type="submit" formaction="../editUser.jsp"
                                     class="btn btn-primary btn-sm">Edit</button>
@@ -83,9 +72,7 @@
                     </div>
                     <div>
                         Display
-
-
-                        <select id="ps" name="pageSize">
+                        <select id="ps" name="pageS">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -93,11 +80,10 @@
                         </select>
                         rows per page
                         <button class="btn btn-outline-primary btn-sm"
-                                formaction="QueryUserByPage"type="submit">Go</button>
+                                formaction="EditUserByPage"type="submit">Go</button>
                     </div>
                 </form>
             </div>
-
 
             <table class="table table-striped table-hover mx-auto">
                 <thead class="table-info">
@@ -106,20 +92,15 @@
                         Class<?> cls = Class.forName("com.annyw.pojo.User");
                         Field[] fields = cls.getDeclaredFields();
                         for(Field f: fields){
-                            String fname = f.getName().toUpperCase();
-                    %>
-                    <th scope="col"><%=fname%></th>
-                    <%
-                        }
-                    %>
+                            String fname = f.getName().toUpperCase();%>
+                        <th scope="col"><%=fname%></th>
+                    <%  }%>
                 </tr>
                 </thead>
                 <tbody>
                 <%
                     Page p = (Page)request.getAttribute("page");
                     List<Object> users = p.getUsers();
-                %>
-                <%
                     for (int i = 0; i < users.size(); i++) {
                         User user = (User)users.get(i);
                 %>
@@ -127,9 +108,8 @@
                     <%
                         for (Field field : fields) {
                             field.setAccessible(true);
-                    %>
-                    <td><%=field.get(user)%></td>
-                    <% } %>
+                    %><td><%=field.get(user)%></td>
+                    <%  } %>
                 </tr>
                 <% } %>
                 </tbody>
@@ -146,33 +126,30 @@
                     </li>
                     <%}else{%>
                     <li class="page-item">
-                        <a class="page-link" href="QueryUserByPage?currentPage=<%=currP-1%>&pageSize=${pageS}"
-                           aria-disabled="true"><span aria-hidden="true">&laquo;</span></a>
+                        <a class="page-link" href="EditUserByPage?currentPage=<%=currP-1%>&pageS
+                        =${pageS}" aria-disabled="true"><span aria-hidden="true">&laquo;</span></a>
                     </li>
                     <%}%>
 
-
-                    <%
-                        for (int i = 1; i <= total; i++) {
-                            if (p.getCurrentPage() == i) {
-                    %>          <li class="page-item active" aria-current="page">
-                        <%      }else{ %>
-                    <li class="page-item">
-                        <% } %>
-                        <a class="page-link"
-                           href="QueryUserByPage?currentPage=<%=i%>&pageSize=${pageS}"><%=i%></a></li>
-                    <%}%>
-                    <%if (p.getCurrentPage() == p.getTotalCount()) {%>
-                    <li class="page-item">
-                        <a class="page-link disabled" href="#">&raquo;</a>
-                    </li>
+                    <%for (int i = 1; i <= total; i++) {
+                        if (p.getCurrentPage() == i) {%>
+                            <li class="page-item active" aria-current="page">
+                    <%  }else{ %>
+                            <li class="page-item">
+                    <%  } %>
+                                <a class="page-link"
+                                   href="EditUserByPage?currentPage=<%=i%>&pageS=${pageS}"><%=i%></a></li>
+                    <%}
+                    if (p.getCurrentPage() == p.getTotalCount()) {%>
+                        <li class="page-item">
+                            <a class="page-link disabled" href="#">&raquo;</a>
+                        </li>
                     <%}else{%>
-                    <li class="page-item">
-                        <a class="page-link" href="QueryUserByPage?currentPage=<%=currP+1%>&pageSize=${pageS}">
-                            &raquo;</a>
-                    </li>
+                        <li class="page-item">
+                            <a class="page-link" href="EditUserByPage?currentPage=<%=currP+1%>&pageS=${pageS}">
+                                &raquo;</a>
+                        </li>
                     <%}%>
-
                 </ul>
             </nav>
         </div>
@@ -181,6 +158,11 @@
 </body>
 <script>
     $("#ps").find("option[value='${pageS}']").attr("selected",true);
+    $("#display").submit(
+        function () {
+            $("#pageS").val($('#ps').val());
+        }
+    );
 </script>
 </html>
 

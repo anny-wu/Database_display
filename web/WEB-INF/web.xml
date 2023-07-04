@@ -4,37 +4,12 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <servlet>
-        <servlet-name>Login</servlet-name>
-        <servlet-class>com.annyw.servlet.Login</servlet-class>
+        <servlet-name>Access</servlet-name>
+        <servlet-class>com.annyw.servlet.Access</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/Login</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Register</servlet-name>
-        <servlet-class>com.annyw.servlet.Register</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Register</servlet-name>
-        <url-pattern>/Register</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Logout</servlet-name>
-        <servlet-class>com.annyw.servlet.Logout</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Logout</servlet-name>
-        <url-pattern>/Logout</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>QueryUserByPage</servlet-name>
-        <servlet-class>com.annyw.servlet.QueryUserByPage</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>QueryUserByPage</servlet-name>
-        <url-pattern>/user/QueryUserByPage</url-pattern>
+        <servlet-name>Access</servlet-name>
+        <url-pattern>/Access</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -43,57 +18,24 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>EditUserByPage</servlet-name>
-        <url-pattern>/admin/EditUserByPage</url-pattern>
+        <url-pattern>/user/EditUserByPage</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AddUser</servlet-name>
-        <servlet-class>com.annyw.servlet.AddUser</servlet-class>
+        <servlet-name>Interaction</servlet-name>
+        <servlet-class>com.annyw.servlet.Interaction</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AddUser</servlet-name>
-        <url-pattern>/admin/AddUser</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>DeleteUser</servlet-name>
-        <servlet-class>com.annyw.servlet.DeleteUser</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DeleteUser</servlet-name>
-        <url-pattern>/admin/DeleteUser</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>EditUser</servlet-name>
-        <servlet-class>com.annyw.servlet.EditUser</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>EditUser</servlet-name>
-        <url-pattern>/user/EditUser</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>AdminEdit</servlet-name>
-        <servlet-class>com.annyw.servlet.AdminEdit</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminEdit</servlet-name>
-        <url-pattern>/admin/AdminEdit</url-pattern>
+        <servlet-name>Interaction</servlet-name>
+        <url-pattern>/user/Interaction</url-pattern>
     </servlet-mapping>
     <filter>
         <filter-name>UserFilter</filter-name>
         <filter-class>com.annyw.filter.UserFilter</filter-class>
     </filter>
-    <filter>
-        <filter-name>AdminFilter</filter-name>
-        <filter-class>com.annyw.filter.AdminFilter</filter-class>
-    </filter>
     <filter-mapping>
         <filter-name>UserFilter</filter-name>
         <url-pattern>/user/*</url-pattern>
     </filter-mapping>
-    <filter-mapping>
-        <filter-name>AdminFilter</filter-name>
-        <url-pattern>/admin/*</url-pattern>
-    </filter-mapping>
-
 </web-app>
 

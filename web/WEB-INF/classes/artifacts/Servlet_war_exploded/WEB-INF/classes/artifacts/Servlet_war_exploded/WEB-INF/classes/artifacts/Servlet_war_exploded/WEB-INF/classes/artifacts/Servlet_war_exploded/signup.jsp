@@ -27,6 +27,7 @@
 
     .form-control{
         width:500px;
+
     }
 
     #showpassword{
@@ -86,10 +87,10 @@
         </div>
 
 
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             <button class="controls flabel btn btn-info" type="submit" onclick="return validateForm()">Sign up</button>
         </div>
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             <button class="controls flabel btn btn-info" type="submit" formaction="index.jsp">Back</button>
         </div>
     </form>
