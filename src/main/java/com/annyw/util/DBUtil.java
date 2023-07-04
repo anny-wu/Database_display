@@ -64,6 +64,7 @@ public class DBUtil {
         return count;
     }
     
+    //Execute update with prepared statement
     public static int executeUpdate(String sql, Object[] params) {
         try {
             pstmt = createPstmt(sql,params);
@@ -80,6 +81,7 @@ public class DBUtil {
         }
     }
     
+    //Execute query with prepared statement
     public static ResultSet executeQuery(String sql, Object[] params) {
         try {
             pstmt = createPstmt(sql,params);

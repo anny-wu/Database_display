@@ -8,10 +8,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 
-//sqlSessionFactory -->sqlSession
 public class MybatisUtils {
     private static SqlSessionFactory sqlSessionFactory = null;
     
+    //Create sqlSessionFactory
     public static SqlSessionFactory createFactory() throws IOException {
         if(sqlSessionFactory == null){
             String resource = "mybatis-config.xml";
@@ -21,7 +21,7 @@ public class MybatisUtils {
         }
         return sqlSessionFactory;
     }
-    
+    //Create sqlSession
     public static SqlSession getSqlSession() throws IOException {
         return createFactory().openSession();
     }

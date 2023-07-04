@@ -47,13 +47,12 @@ public class Register extends HttpServlet {
             
             if (isSuccess) {
                 //Registration success
-                System.out.println("success");
                 response.sendRedirect("index.jsp");
             }
             else {
                 ///Registration fail
-                System.out.println("fail");
-                response.sendRedirect("signup.jsp");
+                request.setAttribute("unameerror", "Username already exits");
+                request.getRequestDispatcher("signup.jsp").forward(request, response);
             }
             
         }

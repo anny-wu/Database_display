@@ -62,8 +62,6 @@
         <div>
           <button class="controls flabel btn btn-info" type="submit" formaction="signup.jsp">Sign up</button>
         </div>
-
-
       </div>
       </div>
     </form>

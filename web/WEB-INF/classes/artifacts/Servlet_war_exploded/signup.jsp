@@ -21,8 +21,13 @@
         margin-top: 20px;
     }
 
+    .controls{
+        width:200px;
+    }
+
     .form-control{
         width:500px;
+
     }
 
     #showpassword{
@@ -55,7 +60,7 @@
             <input type="text" class="form-control" name="username"
                    aria-describedby="usernameHelp'"
                    placeholder="username" id="username">
-            <span class="error" id="unameerror"></span>
+            <span class="error" id="unameerror">${unameerror}</span>
         </div>
         <div>
             <label class="flabel"><strong>Password</strong></label>
@@ -82,8 +87,11 @@
         </div>
 
 
-        <div class="row">
-            <button class="flabel btn btn-info" type="submit" onclick="return validateForm()">Sign up</button>
+        <div class="row d-flex justify-content-center">
+            <button class="controls flabel btn btn-info" type="submit" onclick="return validateForm()">Sign up</button>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <button class="controls flabel btn btn-info" type="submit" formaction="index.jsp">Back</button>
         </div>
     </form>
 </div>

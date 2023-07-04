@@ -1,7 +1,5 @@
 package com.annyw.pojo;
 
-import java.util.Arrays;
-
 public class Client {
     String email;
     int id;
@@ -9,16 +7,6 @@ public class Client {
     String salted_password;
     String salt;
     String privilege;
-    
-    
-    public Client(String email, int id, String username, String salted_password,  String salt, String privilege) {
-        this.email = email;
-        this.id = id;
-        this.username = username;
-        this.salted_password = salted_password;
-        this.salt = salt;
-        this.privilege = privilege;
-    }
     
     public Client() {
     
@@ -72,15 +60,4 @@ public class Client {
         this.privilege = privillege;
     }
     
-    @Override
-    public String toString() {
-        return "Client{" +
-            "email='" + email + '\'' +
-            ", id=" + id +
-            ", username='" + username + '\'' +
-            ", salted_password='" + salted_password + '\'' +
-            ", salt=" + salt +
-            ", privillege='" + privilege + '\'' +
-            '}';
-    }
 }

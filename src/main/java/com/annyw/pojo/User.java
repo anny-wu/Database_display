@@ -3,13 +3,9 @@ import java.sql.Timestamp;
 
 public class User {
     private int id;
-    
     private String username;
-    
     private int age;
-    
     private Timestamp update_time;
-    
     public User() {
     
     }

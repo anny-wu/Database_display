@@ -76,7 +76,6 @@ public class Page<T>{
         this.preNum=currentPage-1<1?1:currentPage-1;
         this.nextNum=currentPage+1>totalCount?totalCount:currentPage+1;
         
-        
         this.users = users;
     }
 }

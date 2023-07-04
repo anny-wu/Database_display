@@ -8,9 +8,14 @@ public class Salt {
         
         String generatedPassword = null;
         try {
+            //Hash password
             MessageDigest md = MessageDigest.getInstance("SHA-256");
+            
+            //Salt password
             md.update(salt);
             byte[] bytes = md.digest(password.getBytes());
+            
+            //Generate string password
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < bytes.length; i++) {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
@@ -28,17 +33,4 @@ public class Salt {
         random.nextBytes(salt);
         return salt;
     }
-    
-    /*public static void main(String[] args) throws NoSuchAlgorithmException {
-        
-        // same salt should be passed
-        byte[] salt = getSalt();
-        String password1 = getSecurePassword("Password", salt);
-        String password2 = getSecurePassword("Password", salt);
-        System.out.println(" Password 1 -> " + password1);
-        System.out.println(" Password 2 -> " + password2);
-        if (password1.equals(password2)) {
-            System.out.println("passwords are equal");
-        }
-    }*/
 }
