@@ -174,13 +174,15 @@
 </div>
 </body>
 <script>
-    $("#ps").find("option[value='${pageS}']").attr("selected",true);
-    $("#display").submit(
-        function () {
-        $("#pageS").val($('#ps').val());
-        alert($("#pageS").val());
-        }
-    );
+    $(document).ready(function() {
+        //Preserve the selected value of the dropdown list
+        $("#ps").find("option[value='${pageS}']").attr("selected",true);
+        //Update page size with the selected value
+        $("#display").submit(
+            function () {
+            $("#pageS").val($('#ps').val());
+            });
+    });
 </script>
 </html>
 

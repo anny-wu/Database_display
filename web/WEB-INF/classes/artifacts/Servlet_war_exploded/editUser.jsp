@@ -28,28 +28,23 @@
     .flabel{
         margin-top: 20px;
     }
-
     .form-group{
         margin-top: 20px;
         margin-left: 20px;
     }
-
     #labele{
         margin-top: 10px;
-    }
-    #deleteS{
-        margin-top: 10px;
-    }
-
-    #buttons{
-        margin-top:20px;
-        margin-bottom:20px;
-        float:right;
     }
     .controlB{
         width: 200px;
         margin: 10px;
     }
+    #buttons{
+        margin-top:20px;
+        margin-bottom:20px;
+        float:right;
+    }
+
 </style>
 
 <body>
@@ -58,97 +53,86 @@
 </div>
 <div class="row">
     <div class="col-8 m-auto back">
-                <form>
-                    <input type="hidden" name="pageS" value="<%=request.getParameter("pageS")%>">
-                    <input type="hidden" id="selected" name="selected" value="1">
-                    <input type="hidden" name="action" value="edit">
-                    <div class="form-group row">
-                        <label class="flabel col-2 col-form-label"><strong>TABLE NAME</strong></label>
-                        <div class="col-4">
-
-                            <input type="text" readonly class="flabel col-4 form-control-plaintext" name="table_name"
-                                   value="<%=request.getParameter("table_name")%>">
-                        </div>
+        <form>
+            <input type="hidden" name="pageS" value="<%=request.getParameter("pageS")%>">
+            <input type="hidden" id="selected" name="selected" value="1">
+            <input type="hidden" name="action" value="edit">
+            <div class="form-group row">
+                <label class="flabel col-2 col-form-label"><strong>TABLE NAME</strong></label>
+                <div class="col-4">
+                    <input type="text" readonly class="flabel col-4 form-control-plaintext" name="table_name"
+                           value="<%=request.getParameter("table_name")%>">
+                </div>
+            </div>
+        <%
+            SqlSession sqlSession = null;
+                try {
+                sqlSession = MybatisUtils.getSqlSession();
+                UserDao mapper = sqlSession.getMapper(UserDao.class);
+                String table_name = request.getParameter("table_name");
+                List<User> users = mapper.getAllUsers(table_name);
+                if(users != null){
+        %>
+            <div class="form-group row">
+                <label id="labele" class="col-2 col-form-label"><strong>Edit</strong></label>
+                <div class="col-6">
+                    <div class="form-outline">
+                        <select id="selectS" class="form-select" aria-label="Default select example">
+                            <%for(User u : users){
+                                String str = "User " + u.getid() + " ( " + u.getusername() + " )";%>
+                            <option value="<%=u.getid()%>"><%=str%></option>
+                            <%}%>
+                        </select>
                     </div>
-
-                        <%
-                   SqlSession sqlSession = null;
-                    try {
-                    sqlSession = MybatisUtils.getSqlSession();
-                    UserDao mapper = sqlSession.getMapper(UserDao.class);
-                    String table_name = request.getParameter("table_name");
-                    List<User> users = mapper.getAllUsers(table_name);
-                    if(users != null){
+                </div>
+            </div>
+            <div class="form-group row">
+            <%
+                Class<?> cls = Class.forName("com.annyw.pojo.User");
+                Field[] fields = cls.getDeclaredFields();
+                for(int i = 1; i < fields.length-1; i++){
+                    fields[i].setAccessible(true);
+                    String fname = fields[i].getName().toUpperCase();
             %>
-                    <div class="form-group row">
-                        <label id="labele" class="col-2 col-form-label"><strong>Edit</strong></label>
-                        <div class="col-6">
-                            <div class="form-outline">
-                                <select id="selectS" class="form-select" aria-label="Default select example">
-                                    <%
-                                        for(User u : users){
-                                            String str = "User " + u.getid() + " ( " + u.getusername() + " )";%>
-                                    <option value="<%=u.getid()%>"><%=str%></option>
-                                    <%}%>
-                                </select>
-                            </div>
-                        </div>
+                <div class="col-6">
+                    <label class="flabel col-2 col-form-label"><strong><%=fname%></strong></label>
+                    <div class="form-outline w-50">
+                        <input type="<%=fields[i].getName()%>" class="form-control edit" id="<%=fields[i].getName()%>" name="<%=fields[i].getName()%>"
+                               aria-describedby="<%=fields[i].getName()%>+'Help'"
+                               placeholder="<%=fields[i].getName()%>">
                     </div>
-
-                    <div class="form-group row">
-
-                        <%
-                            Class<?> cls = Class.forName("com.annyw.pojo.User");
-                            Field[] fields = cls.getDeclaredFields();
-                            for(int i = 1; i < fields.length-1; i++){
-                                fields[i].setAccessible(true);
-                                String fname = fields[i].getName().toUpperCase();
-                        %>
-                        <div class="col-6">
-                            <label class="flabel col-2 col-form-label"><strong><%=fname%></strong></label>
-
-                            <div class="form-outline w-50">
-                                <input type="<%=fields[i].getName()%>" class="form-control edit" id="<%=fields[i].getName()%>" name="<%=fields[i].getName()%>"
-                                       aria-describedby="<%=fields[i].getName()%>+'Help'"
-                                       placeholder="<%=fields[i].getName()%>">
-                            </div>
-                        </div>
-
-
-                        <%
-                            }
-                        %>
-                    </div>
-                    <div id="buttons">
-                        <div>
-                            <button id="edit" type="submit" class="btn btn-lg btn-primary controlB disabled"
-                                    formaction="user/Interaction">Edit</button>
-                            <button type="submit" class="btn btn-lg btn-primary controlB"
-                                    formaction="user/EditUserByPage">Back</button>
-                        </div>
-                    </div>
-                    </form>
+                </div>
+            <%  }%>
+            </div>
+            <div id="buttons">
+                <div>
+                    <button id="edit" type="submit" class="btn btn-lg btn-primary controlB disabled"
+                            formaction="user/Interaction">Edit</button>
+                    <button type="submit" class="btn btn-lg btn-primary controlB"
+                            formaction="user/EditUserByPage">Back</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
-                        <%}
+                <%}
                 }
-
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-            finally {
-                if (sqlSession != null) {
-                    sqlSession.close();
+                catch (Exception e) {
+                    e.printStackTrace();
                 }
-            }
-                %>
-
+                finally {
+                    if (sqlSession != null) {
+                        sqlSession.close();
+                    }
+                }%>
 </body>
 <script>
     $(document).ready(function() {
+        //Record the selected user id for edit
         $('#selectS').change(function () {
             $("#selected").attr("value", $("#selectS").val());
         });
+        //Change edit enable status when input is empty
         $('.edit').on('input',function() {
             var empty = false;
             $('.edit').each(function() {

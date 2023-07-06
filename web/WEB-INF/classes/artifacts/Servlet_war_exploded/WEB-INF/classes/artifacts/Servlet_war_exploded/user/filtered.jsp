@@ -61,8 +61,8 @@
                 <button class="btn btn-secondary" type="submit" value="Logout">Log Out</button>
             </form>
             <div>
-                <form class="display d-flex justify-content-between">
-                    <input type="hidden" name="pageS" value="${pageS}">
+                <form id="display" class="display d-flex justify-content-between">
+                    <input type="hidden" id="pageS" name="pageS" value="${pageS}">
                     <div>
                         <input type="hidden" name="table_name" value="${table_name}">
                         <c:if test="${count > 0}">
@@ -157,7 +157,15 @@
 </div>
 </body>
 <script>
-    $("#ps").find("option[value='${pageS}']").attr("selected",true);
+    $(document).ready(function() {
+        //Preserve the selected value of the dropdown list
+        $("#ps").find("option[value='${pageS}']").attr("selected",true);
+        //Update page size with the selected value
+        $("#display").submit(
+            function () {
+                $("#pageS").val($('#ps').val());
+            });
+    });
 </script>
 </html>
 

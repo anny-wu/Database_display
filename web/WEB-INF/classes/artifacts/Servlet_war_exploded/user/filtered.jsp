@@ -1,8 +1,11 @@
 <%@page import="com.annyw.pojo.Page" %>
 <%@page import="com.annyw.pojo.User" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/WEB-INF/select.tld" prefix="myselect" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.reflect.Field" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -72,12 +75,15 @@
                     </div>
                     <div>
                         Display
-                        <select id="ps" name="pageS">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                        <%
+                            int start = 1;
+                            int end = 5;
+                            Map<String,Integer> values =  new HashMap<>();
+                            for( int i = start; i <= end; i++) {
+                                values.put(String.valueOf(i), i);
+                            }
+                        %>
+                        <myselect:select id="ps" start="<%=start%>" end="<%=end%>" values="<%=values%>" select="${pageS}"/>
                         rows per page
                         <button class="btn btn-outline-primary btn-sm"
                                 formaction="EditUserByPage"type="submit">Go</button>
@@ -157,12 +163,15 @@
 </div>
 </body>
 <script>
-    $("#ps").find("option[value='${pageS}']").attr("selected",true);
-    $("#display").submit(
-        function () {
-            $("#pageS").val($('#ps').val());
-        }
-    );
+    $(document).ready(function() {
+        //Preserve the selected value of the dropdown list
+        $("#ps").find("option[value='${pageS}']").attr("selected",true);
+        //Update page size with the selected value
+        $("#display").submit(
+            function () {
+                $("#pageS").val($('#ps').val());
+            });
+    });
 </script>
 </html>
 

@@ -15,17 +15,15 @@
   .errormsg{
     color:red;
   }
-  .form-control{
-    width:500px;
-  }
   .flabel{
     margin-top: 20px;
   }
-
+  .form-control{
+    width:500px;
+  }
   .controls{
     width:200px;
   }
-
   #showpassword{
     float:right;
     margin-top: -25px;
@@ -46,7 +44,7 @@
                  aria-describedby="usernameHelp'"
                  placeholder="username">
         <span class="errormsg">${uerror}</span>
-        </div>
+      </div>
       <div>
         <label class="flabel"><strong>Password</strong></label>
         <input  type="password" class="form-control" name="password"
@@ -56,17 +54,16 @@
         <span class="errormsg">${perror}</span>
       </div>
       <div>
-      <div class="row text-center">
-        <div>
-          <button class="controls flabel btn btn-info" type="submit"  formaction="Access">Log In</button>
+        <div class="row text-center">
+          <div>
+            <button class="controls flabel btn btn-info" type="submit"  formaction="Access">Log In</button>
+          </div>
+          <div>
+            <button class="controls flabel btn btn-info" type="submit" formaction="signup.jsp">Sign up</button>
+          </div>
         </div>
-        <div>
-          <button class="controls flabel btn btn-info" type="submit" formaction="signup.jsp">Sign up</button>
-        </div>
-      </div>
       </div>
     </form>
-
   </c:if>
   <c:if test="${sessionScope.username != null}">
     Log in as : ${username}
@@ -88,7 +85,7 @@
 </body>
 <script>
   $(document).ready(function() {
-
+    //Toggle password visibility
     $("#showpassword").on("click", function () {
       if ($("#showpassword").hasClass("bi-eye")) {
         $("#showpassword").removeClass("bi-eye");
@@ -100,6 +97,7 @@
         $("input[name='password']").attr("type", "text");
       }
     });
+    //Get the privilege selected for login
     let buttonClicked = "";
     $("#choose button[type = 'submit']").click(function(e){
       buttonClicked = $(this).attr("id");
