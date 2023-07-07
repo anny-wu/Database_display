@@ -27,9 +27,6 @@ public class FilteredServlet extends HttpServlet{
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
             
-            //Get template from path defined in configuration
-            //Template t = cfg.getTemplate("filtered.ftl");
-            
             String table_name = "USER";
             //Get total count
             Integer count = DBUtil.getCount(table_name);
@@ -51,10 +48,6 @@ public class FilteredServlet extends HttpServlet{
             //Create page
             Page<User> page = new Page<>(pageSize, count, pageCount, currentPage, users);
             
-            
-            request.setAttribute("page", page);
-           
-            
             //Store options for the number of rows displayed per page
             Map<String, Integer> values = new HashMap<>();
             for (int i = 1; i < 5; i++) {
@@ -70,6 +63,7 @@ public class FilteredServlet extends HttpServlet{
             for (Field field : fields) {
                 fieldName.add(field.getName().toUpperCase());
             }
+            
             //Get users from database
             for (User u : users) {
                 List<Object> temp = new ArrayList<>();
@@ -83,7 +77,6 @@ public class FilteredServlet extends HttpServlet{
                     else{
                         temp.add(obj);
                     }
-                    
                 }
                 result.add(temp);
             }
@@ -106,37 +99,37 @@ public class FilteredServlet extends HttpServlet{
             //Store the number of pages
             request.setAttribute("totalCount", pageCount);
             
-        //Get user's privilege
-        String name = (String)request.getSession().getAttribute("admin");
-        //Get user's selection of privilege
-        String privilege = request.getParameter("privilege");
-        if (privilege != null && !privilege.equals("")) {
-            //User has just selected a privilege
-            request.getSession().setAttribute("privilege", privilege);
-        }
-        else {
-            //Get user's privilege from session
-            privilege = (String)request.getSession().getAttribute("privilege");
-        }
-        //Filter user based on privilege
-        if (privilege.equals("admin")) {
-            
-            if (name.equals("admin")) {
-                //User is admin and wants to log in as admin
-                request.getRequestDispatcher("/admin/admin.jsp").forward(request, response);
+            //Get user's privilege
+            String name = (String)request.getSession().getAttribute("admin");
+            //Get user's selection of privilege
+            String privilege = request.getParameter("privilege");
+            if (privilege != null && !privilege.equals("")) {
+                //User has just selected a privilege
+                request.getSession().setAttribute("privilege", privilege);
             }
             else {
-                //User is not admin and wants to log in as admin
-                HttpSession session = request.getSession();
-                session.setAttribute("msg", "You do not have admin privilege");
-                response.sendRedirect("../index.jsp");
+                //Get user's privilege from session
+                privilege = (String)request.getSession().getAttribute("privilege");
             }
-        }
-        else {
-            //User wants to log in as user
-            request.getRequestDispatcher("/WEB-INF/template/filtered.ftl").forward(request,response);
-        }
-       
+            //Filter user based on privilege
+            if (privilege.equals("admin")) {
+                
+                if (name.equals("admin")) {
+                    //User is admin and wants to log in as admin
+                    request.getRequestDispatcher("/admin/admin.jsp").forward(request, response);
+                }
+                else {
+                    //User is not admin and wants to log in as admin
+                    HttpSession session = request.getSession();
+                    session.setAttribute("msg", "You do not have admin privilege");
+                    response.sendRedirect("../index.jsp");
+                }
+            }
+            else {
+                //User wants to log in as user
+                request.getRequestDispatcher("/WEB-INF/template/filtered.ftl").forward(request,response);
+            }
+           
         }
         catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
