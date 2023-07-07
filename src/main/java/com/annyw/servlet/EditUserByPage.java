@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
-
+//NOT USED
 public class EditUserByPage extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

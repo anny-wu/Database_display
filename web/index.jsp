@@ -71,11 +71,11 @@
     <form id="choose">
       <input type="hidden" id="privilege" name="privilege" value="">
       <div class="row">
-        <button class="flabel btn btn-info" type="submit" id="admin" formaction="user/EditUserByPage">Log In As
+        <button class="flabel btn btn-info" type="submit" id="admin" formaction="user/display">Log In As
         Admin</button>
       </div>
       <div class="row">
-        <button class="flabel  btn btn-info" type="submit" id="user" formaction="user/EditUserByPage">Log In As
+        <button class="flabel  btn btn-info" type="submit" id="user" formaction="user/display">Log In As
         User</button>
       </div>
     </form>

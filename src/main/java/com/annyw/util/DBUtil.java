@@ -1,28 +1,35 @@
 package com.annyw.util;
 
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class DBUtil {
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/DB?useSSl=true&useUnicode=true&" +
-        "characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
-    
-    private static final String USERNAME = "root";
-    
-    private static final String PASSWORD = "1234";
     
     public static Connection con = null;
-    
     public static PreparedStatement pstmt = null;
-    
     public static ResultSet rs = null;
+    static Properties p = new Properties();
+    static{
+        InputStream is = DBUtil.class.getClassLoader().getResourceAsStream("/jdbc.properties");
+        try{
+            p.load(is);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     //Get Connection
     public static Connection getConnection()
         throws ClassNotFoundException, SQLException {
-        Class.forName(DRIVER);
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        String driver = p.getProperty("driver");
+        String url = p.getProperty("url");
+        String username = p.getProperty("username");
+        String password = p.getProperty("password");
+        Class.forName(driver);
+        con = DriverManager.getConnection(url, username, password);
+        return con;
     }
     
     //Prepare Statement
